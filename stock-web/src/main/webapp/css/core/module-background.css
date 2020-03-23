@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+
+body {
+    background-color: #E8ECF5;
+}
+
+/* 替换OMUI的tab组件背景begin */
+/* 为避免造成其他OMUI组件背景被覆盖，需要精确定位tab组件其中元素的背景 */
+/*不使用inherit是为了兼容IE7 and earlier*/
+.om-tabs.om-widget.om-widget-content.om-corner-all.om-tabs-noborder {
+    background: transparent;
+}
+
+.om-tabs-panels.om-widget-content.om-corner-bottom {
+    background: transparent;
+}
+
+.om-tabs-panels .om-panel-body {
+    background-color: transparent;
+}
+/* 替换OMUI的tab组件背景end */
+
+/* 替换OMUI的grid组件背景 */
+.om-grid.om-widget.om-widget-content {
+    background-color: transparent;
+}
+
+/* 页面管理和页面模板和内容管理使用了jqueryUI组件，替换其背景 */
+/* 替换uitabs的背景*/
+.ui-tabs.ui-widget.ui-widget-content.ui-corner-all{
+        background: transparent;
+}
+.ui-tabs-panel.ui-widget-content.ui-corner-bottom{
+    background: transparent;
+}

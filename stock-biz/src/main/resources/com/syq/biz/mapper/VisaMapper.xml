@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.VisaMapper">
+
+	<resultMap type="com.syq.biz.bo.VisaPrincipalBo" id="visaPrincipalBoMap">
+		<id property="id" column="id"></id>
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="status" column="status" />
+		<result property="templateCode" column="template_code" />
+		<result property="flowStatus" column="flow_status" />
+		<result property="flowMsg" column="flow_msg" />
+		<result property="personId" column="person_id" />
+		<result property="taskId" column="task_id" />
+		<collection property="attributes" ofType="com.syq.biz.bo.VisaAttributeBo"
+			column="principal_id">
+			<id property="id" column="aid" />
+			<result property="principalId" column="principal_id" />
+			<result property="attrName" column="attr_name" />
+			<result property="attrValue" column="attr_value" />
+		</collection>
+	</resultMap>
+
+	<resultMap type="com.syq.biz.bo.TaskBo" id="taskBoMap">
+		<id property="id" column="id"></id>
+		<result property="taskName" column="task_name" />
+		<result property="instructionNo" column="instruction_no" />
+		<result property="headerName" column="header_name" />
+		<result property="headerIdCard" column="header_idCard" />
+		<result property="taskBeginTime" column="task_begin_time" />
+		<result property="taskEndTime" column="task_end_time" />
+		<result property="taskDescription" column="task_description" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="status" column="status" />
+		<result property="taskCode" column="task_code" />
+		<result property="createTime" column="create_time" />
+		<result property="taskCountry" column="task_country" />
+		<result property="groupUnit" column="group_unit" />
+		<result property="visitPurpose" column="visit_purpose" />
+		<result property="costSource" column="cost_source" />
+		<result property="instructionTime" column="instruction_time" />
+		<result property="hasGroupMember" column="has_group_member" />
+		<result property="hasFaffPlan" column="has_faff_plan" />
+		<result property="transactor" column="transactor" />
+		<result property="flowStatus" column="flow_status" />
+		<result property="userName" column="user_name" />
+		<result property="idNumber" column="id_number" />
+		<result property="visaPrincipalId" column="visaPrincipalId" />
+		<result property="personId" column="person_id" />
+		<result property="deptName" column="dept_name" />
+		<result property="mobile" column="mobile" />
+		<result property="contactEmail" column="contact_email" />
+		<result property="countryName" column="country_name" />
+	</resultMap>
+
+	<resultMap type="com.syq.biz.bo.VisaAttributeBo" id="visaAttributeBoMap">
+		<id property="id" column="id" />
+		<result property="attrName" column="attr_name" />
+		<result property="attrValue" column="attr_value" />
+	</resultMap>
+
+	<select id="selectById" parameterType="long" resultMap="visaPrincipalBoMap">
+		SELECT
+		p.*,a.* FROM visa_principal p LEFT JOIN visa_attribute a ON p.id =
+		a.principal_id WHERE p.id = #{id}
+	</select>
+
+	<select id="selectByPersonIdTaskIdAndCode" resultMap="visaPrincipalBoMap">
+		SELECT
+		p.*,a.* FROM visa_principal p LEFT JOIN visa_attribute a ON p.id =
+		a.principal_id WHERE p.person_id = #{0} AND p.task_id = #{1} AND
+		p.template_code = #{2}
+	</select>
+
+	<insert id="batchSaveVisaAttribute" parameterType="java.util.Map">
+		INSERT INTO visa_attribute (
+		principal_id,
+		attr_name,
+		attr_value
+		)
+		VALUES
+		<foreach collection="list" item="bo" index="index" separator=",">
+			(
+			#{pricipalId},
+			#{bo.fieldID},
+			#{bo.fieldValue}
+			)
+		</foreach>
+
+	</insert>
+
+	<insert id="insert" parameterType="com.syq.biz.domain.VisaPrincipal"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO visa_principal (
+		person_id,
+		task_id
+		<if test="templateCode != null and templateCode != ''">
+			,template_code
+		</if>
+		<if test="createTime != null and createTime != ''">
+			,create_time
+		</if>
+		<if test="operatorId != null and operatorId != ''">
+			,operatorId
+		</if>
+		<if test="operatorTime != null and operatorTime != ''">
+			,operator_time
+		</if>
+		<if test="flowStatus != null and flowStatus != ''">
+			,flowStatus
+		</if>
+		)
+		VALUES
+		(
+		#{personId},
+		#{taskId}
+		<if test="templateCode != null and templateCode != ''">
+			,#{templateCode}
+		</if>
+		<if test="createTime != null and createTime != ''">
+			,#{createTime}
+		</if>
+		<if test="operatorId != null and operatorId != ''">
+			,#{operatorId}
+		</if>
+		<if test="operatorTime != null and operatorTime != ''">
+			,#{operatorTime}
+		</if>
+		<if test="flowStatus != null and flowStatus != ''">
+			,#{flowStatus}
+		</if>
+		)
+	</insert>
+
+	<select id="selectVisaAttribute" parameterType="java.util.Map"
+		resultMap="visaPrincipalBoMap">
+		SELECT * FROM visa_attribute WHERE
+		principal_id=#{pricipalId} and attr_name = #{bean.fieldID}
+
+	</select>
+
+	<insert id="saveVisaAttribute" parameterType="java.util.Map">
+		INSERT INTO
+		visa_attribute (
+		principal_id,
+		attr_name,
+		attr_value
+		)
+		VALUE
+		(
+		#{pricipalId},
+		#{bean.fieldID},
+		#{bean.fieldValue}
+		)
+
+	</insert>
+
+	<update id="updateVisaAttribute" parameterType="java.util.Map">
+		UPDATE visa_attribute
+		<trim prefix="set" suffixOverrides=",">
+			<if test="bean.fieldValue != null">attr_value=#{bean.fieldValue},</if>
+		</trim>
+		WHERE principal_id=#{pricipalId} and attr_name = #{bean.fieldID}
+
+	</update>
+
+	<update id="audit" parameterType="com.syq.biz.domain.VisaPrincipal">
+		UPDATE visa_principal
+		<trim prefix="set" suffixOverrides=",">
+			<if test="flowStatus != null and flowStatus != ''">flow_status=#{flowStatus},</if>
+			<if test="flowMsg != null and flowMsg != ''">flow_msg=#{flowMsg},</if>
+		</trim>
+		WHERE id=#{id}
+
+	</update>
+
+	<update id="batchUpdateStatus">
+		UPDATE visa_principal
+		set
+		flow_status=#{1}
+		WHERE id=#{0}
+
+	</update>
+
+
+	<select id="selectTaskByCondition" parameterType="com.syq.pagination.common.TaskPo"
+		resultMap="taskBoMap">
+		SELECT
+		tk.id,tk.instruction_no,tk.task_name,tk.instruction_no,tk.header_name,tk.header_idCard,
+		tk.task_begin_time,tk.task_end_time,tk.operator_id,tk.operator_time,tk.status,
+		tk.task_code,tk.create_time,tk.group_unit,tk.visit_purpose,
+		tk.cost_source,tk.instruction_time,tk.has_group_member,tk.has_faff_plan,
+		tk.transactor,tk.task_country,vp.flow_status,vp.flow_msg
+		FROM
+		task tk
+		left join visa_principal vp on tk.id = vp.task_id
+		<trim prefix="where" prefixOverrides="AND | OR">
+
+			<if test="taskName != null and taskName != ''">
+				and tk.task_name like CONCAT('%',#{taskName},'%')
+			</if>
+
+			<if test="taskCode != null and taskCode != ''">
+				and tk.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+
+			<if test="headerName != null and headerName != ''">
+				and tk.header_name like CONCAT('%',#{headerName},'%')
+			</if>
+
+			<if test="taskCountry != null and taskCountry != ''">
+				and tk.task_country like CONCAT('%',#{taskCountry},'%')
+			</if>
+
+			<if test="status != null and status != ''">
+				and tk.status = #{status}
+			</if>
+
+			<if test="taskBeginTime != null ">
+				and tk.task_begin_time <![CDATA[>=]]>
+				#{taskBeginTime}
+			</if>
+			<if test="taskEndTime != null ">
+				and tk.task_end_time <![CDATA[<=]]>
+				#{taskEndTime}
+			</if>
+			<if test="flowStatus != null and flowStatus != 0">
+				and vp.flow_status = #{flowStatus}
+			</if>
+
+			<if test="searchStatus != null and searchStatus.size() != 0">
+				AND vp.flow_status in
+				<foreach item="s" collection="searchStatus" open="("
+					separator="," close=")">
+					#{s}
+				</foreach>
+			</if>
+
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getTaskCount" parameterType="com.syq.pagination.common.TaskPo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		task tk left join visa_principal vp on tk.id =
+		vp.task_id
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="taskName != null and taskName != ''">
+				and tk.task_name like CONCAT('%',#{taskName},'%')
+			</if>
+
+			<if test="taskCode != null and taskCode != ''">
+				and tk.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+
+			<if test="headerName != null and headerName != ''">
+				and tk.header_name like CONCAT('%',#{headerName},'%')
+			</if>
+
+			<if test="taskCountry != null and taskCountry != ''">
+				and tk.task_country like CONCAT('%',#{taskCountry},'%')
+			</if>
+
+			<if test="status != null and status != ''">
+				and tk.status = #{status}
+			</if>
+
+			<if test="taskBeginTime != null ">
+				and tk.task_begin_time <![CDATA[>=]]>
+				#{taskBeginTime}
+			</if>
+			<if test="taskEndTime != null ">
+				and tk.task_end_time <![CDATA[<=]]>
+				#{taskEndTime}
+			</if>
+			<if test="flowStatus != null ">
+				and vp.flow_status = #{flowStatus}
+			</if>
+		</trim>
+	</select>
+
+
+
+	<select id="selectVisaPrincipalByCondition" parameterType="com.syq.pagination.common.TaskPo"
+		resultMap="taskBoMap">
+		SELECT
+		tk.id,tk.instruction_no,tk.task_name,tk.instruction_no,tk.header_name,tk.header_idCard,
+		tk.task_begin_time,tk.task_end_time,tk.operator_id,tk.operator_time,tk.status,
+		tk.task_code,tk.create_time,tk.group_unit,tk.visit_purpose,
+		tk.cost_source,tk.instruction_time,tk.has_group_member,tk.has_faff_plan,vp.id
+		as visaPrincipalId,
+		tk.transactor,vp.template_code as
+		task_country,vp.flow_status,vp.flow_msg
+		,pe.user_name,pe.id_number,vc.name as country_name
+		FROM
+		visa_principal
+		vp LEFT JOIN
+		task tk ON vp.task_id = tk.id LEFT JOIN person pe ON vp.person_id = pe.id
+		LEFT JOIN visa_country vc ON vp.template_code = vc.code
+		WHERE
+		1=1
+		<if test="searchStatus != null and searchStatus.size() != 0">
+			AND vp.flow_status in
+			<foreach item="s" collection="searchStatus" open="("
+				separator="," close=")">
+				#{s}
+			</foreach>
+		</if>
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getVisaPrincipalCount" parameterType="com.syq.pagination.common.TaskPo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		visa_principal vp,task tk,person pe
+		WHERE
+		vp.task_id
+		= tk.id and vp.person_id = pe.id
+		<if test="searchStatus != null and searchStatus.size() != 0">
+			AND vp.flow_status in
+			<foreach item="s" collection="searchStatus" open="("
+				separator="," close=")">
+				#{s}
+			</foreach>
+		</if>
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+	</select>
+
+	<select id="getVisaPrincipal" parameterType="long" resultMap="visaPrincipalBoMap">
+		SELECT p.*,a.* FROM visa_principal p LEFT JOIN visa_attribute a ON
+		p.id = a.principal_id WHERE p.id = #{0}
+	</select>
+
+
+	<update id="updateVisaStatusByTaskId">
+		UPDATE visa_principal
+		set
+		flow_status=#{1}
+		WHERE
+		task_id=#{0}
+
+	</update>
+
+
+	<select id="selectVisaPrincipalByConditionForTodo"
+		parameterType="com.syq.pagination.common.TaskPo" resultMap="taskBoMap">
+		SELECT
+		tk.id,tk.instruction_no,tk.task_name,tk.instruction_no,tk.header_name,tk.header_idCard,
+		tk.task_begin_time,tk.task_end_time,tk.operator_id,tk.operator_time,tk.status,
+		tk.task_code,tk.create_time,tk.group_unit,tk.visit_purpose,
+		tk.cost_source,tk.instruction_time,tk.has_group_member,tk.has_faff_plan,vp.id
+		as visaPrincipalId,vp.person_id,
+		tk.transactor,vp.template_code as
+		task_country,vp.flow_status,vp.flow_msg
+		,pe.user_name,pe.id_number,pe.dept_name,pe.mobile
+		,pe.contact_email,vc.name as country_name
+		FROM
+		visa_principal vp LEFT
+		JOIN
+		task tk ON vp.task_id = tk.id LEFT JOIN person pe ON vp.person_id = pe.id
+		LEFT JOIN visa_country vc ON vp.template_code = vc.code
+		WHERE
+		vp.flow_status in (0,2)
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getVisaPrincipalCountForTodo" parameterType="com.syq.pagination.common.TaskPo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		visa_principal vp,task tk,person pe
+		WHERE
+		vp.task_id
+		= tk.id and vp.person_id = pe.id
+		and vp.flow_status in (0,2)
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+	</select>
+	
+	
+	
+	
+	<select id="selectNewVisaPrincipalByCondition" parameterType="com.syq.pagination.common.TaskPo"
+		resultMap="taskBoMap">
+		SELECT
+		tk.id,tk.instruction_no,tk.task_name,tk.instruction_no,tk.header_name,tk.header_idCard,
+		tk.task_begin_time,tk.task_end_time,tk.operator_id,tk.operator_time,tk.status,
+		tk.task_code,tk.create_time,tk.group_unit,tk.visit_purpose,
+		tk.cost_source,tk.instruction_time,tk.has_group_member,tk.has_faff_plan,vp.id
+		as visaPrincipalId,
+		tk.transactor,vp.template_code as
+		task_country,vp.flow_status,vp.flow_msg
+		,pe.user_name,pe.id_number,vc.name as country_name
+		FROM
+		visa_file_flow vff LEFT JOIN 
+		visa_principal
+		vp ON vff.principal_id = vp.id LEFT JOIN
+		task tk ON vp.task_id = tk.id LEFT JOIN person pe ON vp.person_id = pe.id
+		LEFT JOIN visa_country vc ON vp.template_code = vc.code
+		WHERE
+		1=1
+		<if test="flowStatus != null and flowStatus != -1">
+			and vp.flow_status = #{flowStatus}
+		</if>
+		<if test="searchStatus != null and searchStatus.size() != 0">
+			AND vff.flow_status in
+			<foreach item="s" collection="searchStatus" open="("
+				separator="," close=")">
+				#{s}
+			</foreach>
+		</if>
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		group by vff.principal_id
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getNewVisaPrincipalCount" parameterType="com.syq.pagination.common.TaskPo"
+		resultType="int">
+		SELECT count(DISTINCT vff.principal_id)
+		FROM
+		visa_file_flow vff LEFT JOIN 
+		visa_principal
+		vp ON vff.principal_id = vp.id LEFT JOIN
+		task tk ON vp.task_id = tk.id LEFT JOIN person pe ON vp.person_id = pe.id
+		LEFT JOIN visa_country vc ON vp.template_code = vc.code
+		WHERE
+		vp.task_id
+		= tk.id and vp.person_id = pe.id
+		<if test="searchStatus != null and searchStatus.size() != 0">
+			AND vff.flow_status in
+			<foreach item="s" collection="searchStatus" open="("
+				separator="," close=")">
+				#{s}
+			</foreach>
+		</if>
+		<if test="taskName != null and taskName != ''">
+			and tk.task_name like CONCAT('%',#{taskName},'%')
+		</if>
+
+		<if test="taskCode != null and taskCode != ''">
+			and tk.task_code like CONCAT('%',#{taskCode},'%')
+		</if>
+
+		<if test="taskId != null">
+			and tk.id = #{taskId}
+		</if>
+
+	</select>
+
+
+</mapper>

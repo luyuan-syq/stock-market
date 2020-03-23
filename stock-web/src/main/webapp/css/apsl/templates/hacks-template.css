@@ -1,0 +1,7 @@
+/* 必须导入iehacks.css */
+@import url("../core/iehacks.css");
+
+@media screen, projection
+{
+	/* 此处可以添加自定义的Hacks */
+}

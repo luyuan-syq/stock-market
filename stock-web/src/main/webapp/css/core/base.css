@@ -1,0 +1,159 @@
+/*!base.css  */
+@CHARSET "UTF-8";
+
+
+@media all {
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	option {
+		padding-left: 0.4em;
+	}
+	select {
+		padding: 1px;
+	}
+	* html body * {
+		overflow: visible;
+	}
+	body {
+		font-size: 100.01%;
+		background: #fff;
+		color: #000;
+	}
+	div {
+		outline: 0 none;
+	}
+	article, aside, canvas, details, figcaption, figure, footer, header,
+		hgroup, menu, nav, section, summary {
+		display: block;
+	}
+	fieldset, img {
+		border: 0 solid;
+	}
+	blockquote {
+		margin: 0 0 1em 0.8em;
+	}
+	blockquote:before, blockquote:after, q:before, q:after {
+		content: "";
+	}
+
+	/***************************定义清除浮动的样式***************************/
+	.wzax-clearfix:after {
+		clear: both;
+		content: ".";
+		display: block;
+		font-size: 0;
+		height: 0;
+		visibility: hidden;
+	}
+	.wzax-clearfix {
+		display: block;
+	}
+	.wzax-floatbox {
+		display: table;
+		width: 100%;
+	}
+	#wzax-ie_clearing {
+		display: none;
+	}
+	.wzax-skip, .wzax-hideme {
+		position: absolute;
+		top: -32768px;
+		left: -32768px;
+	}
+	.wzax-skip:focus, .wzax-skip:active {
+		position: static;
+		top: 0;
+		left: 0;
+	}
+	#wzax-skiplinks {
+		position: absolute;
+		top: 0px;
+		left: -32768px;
+		z-index: 1000;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+	#wzax-skiplinks .wzax-skip:focus, #wzax-skiplinks .wzax-skip:active {
+		left: 32768px;
+		outline: 0 none;
+		position: absolute;
+		width: 100%;
+	}
+}
+
+@media screen , projection {
+	#wzax-col1 {
+		float: left;
+		width: 20%;
+	}
+	#wzax-col2 {
+		float: right;
+		width: 20%;
+	}
+	#wzax-col3 {
+		width: auto;
+		margin: 0 20%;
+	}
+	#wzax-col1_content, #wzax-col2_content, #wzax-col3_content {
+		position: relative;
+	}
+	.wzax-subcolumns {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+	}
+	.wzax-subcolumns_oldgecko {
+		width: 100%;
+		float: left;
+	}
+	.wzax-col_left {
+		float: left;
+	}
+	.wzax-layout_left {
+		float: left;
+	}
+	.wzax-col_right {
+		float: right;
+		margin-left: -5px;
+	}
+	.wzax-layout_right {
+		float: right;
+		margin-left: -5px;
+	}
+	.wzax-subc {
+		padding: 0 0.5em;
+	}
+	.wzax-subcl {
+		padding: 0 1em 0 0;
+	}
+	.wzax-subcr {
+		padding: 0 0 0 1em;
+	}
+	.wzax-equalize, .wzax-equalize .wzax-subcolumns {
+		table-layout: fixed;
+	}
+	.wzax-equalize>div {
+		display: table-cell;
+		float: none;
+		margin: 0;
+		overflow: hidden;
+		vertical-align: top;
+	}
+	#search-panel span.label {
+		margin-left: 10px;
+	}
+	#search-panel .input-text {
+		border: 1px solid #6D869E;
+		height: 18px;
+		vertical-align: middle;
+		width: 137px;
+	}
+
+	#search-panel span.om-combo, #search-panel span.om-calendar {
+		vertical-align: middle;
+	}
+}

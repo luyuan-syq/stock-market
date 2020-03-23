@@ -1,0 +1,480 @@
+@CHARSET "UTF-8";
+
+@media screen, projection
+{
+	
+/*+++++++++++++++++++++++++++定义屏幕的整体布局模板 (Start)+++++++++++++++++++++++++++*/
+/** 
+ * 为了防止,突然出现滚动条而导致页面布局改变,所以一开始就设置竖直滚动条是显示的 
+ */
+body {
+/* 	overflow-y: scroll; */
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************定义布局的基础样式***************************/
+/* Page margins and background */
+body.aps {
+	text-align: center;
+	background-color: #E6ECF4;
+	font-family: "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+}
+
+/* Layout:Width, Background, Border */
+.aps-page_margins {
+	min-width: 740px;
+	/* max-width: 80em;  */
+	margin: 0 auto;
+	text-align: left;
+}
+
+.aps-page {
+	padding: 0;
+}
+
+/* Design of the Main Layout Elements */
+#aps-header {
+	height: 55px;
+	background: url("../../images/login/header_bg.png") repeat-x;
+}
+
+#aps-logo {
+	height: 60px;
+	background: url("../../images/login/logo.png") no-repeat 15px center;
+}
+
+#aps-topnav {
+	display: none;
+}
+
+#aps-nav, .aps-hlist {
+	display: none;
+}
+
+#aps-main {
+	min-width: 740px;
+	max-width: 67em;
+	margin: 0 auto;
+	text-align: left;
+	padding: 30px 0 0 0;
+	background-color: transparent;
+}
+
+#aps-footer {
+    color: gray;
+    padding: 10px 20px;
+    border-top: 5px #efefef solid;
+    line-height: 1.5em;
+}
+
+#aps-header, #aps-nav, #aps-main, #aps-footer { 
+	clear: both; 
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************定制内容区域列布局样式***************************/
+#aps-col1, #aps-col1_content{
+	display: none;
+}
+
+#aps-col2, #aps-col2_content{
+	display: none;
+}
+
+#aps-col3 {
+	margin: 0;
+}
+
+#aps-col3_content {
+	width: 1185px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    overflow: auto;
+    background-position: 10px 40px;
+    min-height: 437px;
+	background: url("../../images/login/form-bg.jpg") no-repeat left top;
+}
+
+/********************* aps-login-form *********************/
+#aps-col3_content #aps-login-form {
+	padding: 15px;
+	position: absolute;
+    left: 435px;
+    top: 105px;
+    width: 300px;
+    height: 360px;
+    background-color: white;
+    border: 1px solid #B4C3D2;
+}
+#aps-col3_content #aps-login-form .tip {
+	display: block;
+	color: #597591;
+	font-size: 14px; 
+}
+#aps-col3_content #aps-login-form div.item {
+	
+}
+#aps-col3_content #aps-login-form label.field-label {
+	display: block;
+	color: #222;
+	font-size: 14px;
+}
+#aps-col3_content #aps-login-form div.username {
+	margin-top: 22px;
+}
+#aps-col3_content #aps-login-form div.password {
+	
+}
+#aps-col3_content #aps-login-form input#username,
+#aps-col3_content #aps-login-form input#password {
+	padding: 1px 8px;
+	height: 38px;
+	line-height: 38px\9;
+    width: 280px;
+    border: 1px solid #B3C7E0;
+    font-size: 16px;
+    margin-top: 4px;
+}
+#aps-col3_content #aps-login-form input#username.focus {
+	background: #FCEEC1;	
+}
+#aps-col3_content #aps-login-form input#password.focus {
+	background: #FCEEC1;	
+}
+
+
+#aps-col3_content #aps-login-form .password-service {
+	color: gray;
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+#aps-col3_content #aps-login-form .password-service label {
+	float: left;
+}
+#aps-col3_content #aps-login-form .password-service .forget-password {
+	float: right;
+	color: gray;
+}
+
+#aps-col3_content #respMsg {
+	padding-top: 20px;
+}
+#aps-col3_content #aps-login-form .password-service-warning {
+	padding-top: 5px;
+}
+#aps-col3_content #respMsg, 
+#aps-col3_content #aps-login-form .password-service-warning {
+	display: block;
+    width: 300px;
+	height: 16px;
+}
+#aps-col3_content #respMsg .resp-error,
+#aps-col3_content #aps-login-form .password-service-warning .content {
+	display: block;
+	padding-left: 20px;
+    height: 16px;
+}
+#aps-col3_content #aps-login-form .password-service-warning .content {
+	color: #1010E2;
+	background: url("../../images/login/attention.png") no-repeat left center;
+}
+#aps-col3_content #respMsg .resp-error {
+	color: #FF4500;
+    background: url(../../images/login/error.png) no-repeat left center;
+}
+
+#aps-col3_content #aps-login-form div.btn {
+	padding-top: 20px;
+}
+#aps-col3_content #aps-login-form #submit {
+	border: 0;
+    cursor: pointer;
+    width: 150px;
+    height: 42px;
+	background: transparent url("../../images/login/submit.png") no-repeat scroll top;
+}
+#aps-col3_content #aps-login-form #submit:hover {
+    background: url("../../images/login/submit.png") no-repeat scroll center;
+}
+#aps-col3_content #aps-login-form #submit:active {
+    background: url("../../images/login/submit.png") no-repeat scroll bottom;
+}
+#aps-col3_content #aps-login-form #guest {
+	display:inline-block;
+	vertical-align: middle;
+	margin-top: 8px;
+	margin-left: 22px;
+	color: #004098;
+	font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+	*vertical-align: top;
+	*margin-top: 20px;
+}
+#aps-col3_content #aps-login-form #guest:HOVER {
+	color: #006098;
+}
+
+#aps-col3_content #aps-login-form div.password {
+	padding-top: 20px;
+}
+
+#aps-footer a {
+	color: #999;
+	background-color: transparent;
+	font-weight:bold;
+}
+#aps-footer a:focus,
+#aps-footer a:hover,
+#aps-footer a:active {
+	color: #4D87C7;
+	background-color: transparent;
+	text-decoration: underline;
+}
+/********************* aps-login-form *********************/
+	
+/********************4a-login*****************************/
+#aps-login_main {
+	width: 1185px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0px;
+    margin-top: 55px;
+    overflow: auto;
+    background-position: 10px 40px;
+    min-height: 437px;
+	background: url("../../images/login/form-bg.jpg") no-repeat left top;
+}
+	
+.login_box_bg {
+    width: 410px;
+    margin-top: 60px;
+    margin-left: 45%;
+    height: 290px;
+    background-color: #dbdbdb;
+    position: relative;
+}
+.login_box {
+    width: 411px;
+    position: absolute;
+    left: 15px;
+    top: -20px;
+}
+
+.login_box .title {
+    height:45px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #dedede;
+    background-color: #E6ECF4;
+}
+
+.login_box .title a  {
+    height: 33px;
+    line-height: 33px;
+    color: #888888;
+    font-family: "微软雅黑";
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 4px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-top-color: #dedede;
+    border-right-color: #dedede;
+    border-left-color: #dedede;
+    margin-top: 10px;
+    background-color: #f8f8f8;
+}
+.login_box .title a:hover {
+    text-decoration: none;
+}
+.login_box .title a.def {
+    color: #0981d7;
+    line-height: 45px;
+    height: 45px;
+    margin-top: 0px;
+    background-color: #FFF;
+}
+
+.login_box .login_cont {
+    background-color: #FFF;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-color: #dedede;
+    border-bottom-color: #dedede;
+    border-left-color: #dedede;
+    color: #989898;
+    font-family: "微软雅黑", "宋体";
+    font-size: 14px;
+    height: 200px;
+    padding: 30px 40px 10px 40px;
+}
+
+.login_box .login_cont .text {
+    height: 40px;
+    border: 1px solid #cccccc;
+    background-color: #FFF;
+    font-size: 16px;
+    font-family: "微软雅黑", "宋体";
+    color: #989898;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 40px;
+    padding-left: 50px;
+    width: 275px;
+}
+
+.login_box .login_cont .select {
+    padding-left:5px;
+    border: 1px solid #cccccc;
+    height:40px;
+    line-height:40px;
+    width:195px;
+    background-color: #FFF;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.login_box .login_cont .text:focus{
+    border: 1px solid #4599e4;
+}
+.login_box .login_cont .name{
+    background-image: url(../../images/login/icon_user.jpg);
+    background-repeat: no-repeat;
+    background-position: 11px center;
+
+}
+.login_box .login_cont .pw{
+    background-image: url(../../images/login/icon_ps.jpg);
+    background-repeat: no-repeat;
+    background-position: 11px center;
+
+}
+.login_box .login_cont .btn_box   {
+    height: 30px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #646464;
+}
+
+.login_box .login_cont .btn_box .left    {
+    float: left;
+    line-height: 30px;
+    font-family: "微软雅黑", "宋体"; font-size:12px;
+    padding-top: 5px;
+}
+
+.login_box .login_cont .btn_box .left  label{
+    padding: 3px 5px;
+    vertical-align: middle;
+    line-height: 13px;
+}
+
+.login_box .login_cont .btn_box .left a{
+    font-size: 15px;
+    text-decoration: underline;
+    color: #0981d7;
+    font-weight: bold;
+    line-height: 30px;
+    font-family: "微软雅黑", "宋体";
+}
+
+.login_box .login_cont .btn {
+    font-family: "微软雅黑", "宋体";
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #FFF;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    height: 30px;
+    width: 90px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    cursor: pointer;
+    background-image: url(../../images/login/btn_bg.png);
+    position: relative;
+    top: 0px;
+    right: 0px;
+    float: right;
+    margin-right:1px;
+
+}
+.login_box .login_cont .help    {
+    text-align: right;
+   margin:15px 2px 0 0; 
+}
+.login_box .login_cont .help a   {
+    font-family: "微软雅黑","宋体";
+   
+}
+
+
+.login_box .login_cont .help span   {
+    font-family: "微软雅黑","宋体";
+}
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************针对纵屏的样式***************************/
+
+/*原理是将主内容区域.aps-page添加样式padding-bottom: xpx;然后将#aps-footer添加样式margin: -xpx;从而令Footer黏着在主内容区域下*/
+body, html {
+    height: 100% !important; 
+    padding: 0;
+}
+
+.aps-page_margins {
+    position: relative !important;
+    min-height: 100%;
+    height: auto !important;
+}
+
+* html .aps-page_margins {
+	height:100% !important; 
+}
+
+.aps-page {
+	
+}
+
+#aps-footer {
+    position:relative !important;
+    min-width: 740px;
+    margin: 0 auto;
+    margin: -25px auto 0 auto;
+    border: 0 none;
+    padding: 0;
+}
+
+#aps-footer_content {
+	height: 25px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/*+++++++++++++++++++++++++++定义屏幕的整体布局模板 (End)+++++++++++++++++++++++++++*/
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.WzaxModuleMapper">
+
+	<resultMap type="com.syq.biz.domain.WzaxModule" id="moduleMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="uuid" column="uuid" />
+		<result property="uuname" column="uuname" />
+		<result property="url" column="url" />
+		<!-- 查询父模块 -->
+		<association property="parent" column="parent_id" select="getModuleById"></association>
+		<!-- 查询子模块 -->
+		<collection property="children" column="id" select="getChildrenModues"></collection>
+		<!-- 权限 -->
+		<collection property="rights" column="id" ofType="com.syq.biz.domain.WzaxRight"
+			select="selectRightsByModuleId">
+		</collection>
+		
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.domain.WzaxRight" id="rightMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="uuid" column="uuid" />
+		<result property="url" column="url" />
+	</resultMap>
+
+	<select id="getModuleById" parameterType="int" resultMap="moduleMap">  
+        select * from wzax_module where id = #{parent_id}  
+    </select> 
+    
+    <select id="getChildrenModues" parameterType="int" resultMap="moduleMap">  
+        select * from wzax_module where parent_id = #{id}  
+    </select> 
+    
+    <select id="getRootModules" resultMap="moduleMap">  
+        select * from wzax_module where parent_id is null or parent_id = 0  
+    </select>
+    
+    
+    
+    <select id="selectRightsByModuleId" resultMap="rightMap">  
+        select * from wzax_right where module_id = #{id}
+    </select>
+    
+
+</mapper>

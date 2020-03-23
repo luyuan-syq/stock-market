@@ -1,0 +1,65 @@
+/*+++++++++++++++++++++++++++设置横向导航条 (Start)+++++++++++++++++++++++++++*/
+@media all
+{
+  .aps-hlist {
+    width:100%;
+    overflow:hidden;
+    float:left;
+    display:inline;
+    position:relative;
+    background-color:#c0c0c0;
+    border-top:1px #333 solid;
+    border-bottom:1px #333 solid;
+    line-height:0;
+  }
+
+  .aps-hlist ul {
+    margin:0;
+    padding:0;
+    display:inline;
+    float:left;
+    border-left:1px #aaa solid;
+    border-right:1px #fff solid;
+  }
+
+  .aps-hlist ul li {
+    border-left:1px #fff solid;
+    border-right:1px #aaa solid;
+    display:inline;
+    float:left;
+    font-size:1.0em;
+    line-height:1em;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+  }
+
+  .aps-hlist ul li a,
+  .aps-hlist ul li strong {
+    background:transparent;
+    color:#000;
+    display:block;
+    font-size:1em;
+    font-weight:bold;
+    margin:0;
+    padding:0.5em 0.8em 0.5em 0.8em;
+    text-decoration:none;
+    width:auto;
+  }
+
+  .aps-hlist ul li a:focus,
+  .aps-hlist ul li a:hover,
+  .aps-hlist ul li a:active  { background:#eee; color:#333; text-decoration:none; outline: 0 none; }
+
+  .aps-hlist ul li.active {
+  	background-color:#272727;
+    border-left:1px #444 solid;
+    border-right:1px #888 solid;
+  }
+
+  .aps-hlist ul li.active strong,
+  .aps-hlist ul li.active a:focus,
+  .aps-hlist ul li.active a:hover,
+  .aps-hlist ul li.active a:active { background:transparent; color:#fff; text-decoration:none; }
+}
+/*+++++++++++++++++++++++++++设置横向导航条 (End)+++++++++++++++++++++++++++*/

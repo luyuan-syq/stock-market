@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+/**
+ * @name: tree
+ * @overview: 定义树的样式
+ * @author: chenmingwei
+ */
+.aps-tree-container{
+    border: 1px solid #B9C6D6;
+	width: 170px;
+/* 	padding: 15px 10px 10px 5px; */
+	height: 550px;
+	overflow: auto;
+	color: #515459;
+    font-size: 12px;
+}
+
+.aps-tree-container-header{
+    height: 25px;
+    font-weight: bolder;
+    padding: 5px;
+    border-bottom: 1px solid #B9C6D6;
+}
+
+.aps-tree-container .create-btn{
+    color: #515459;
+    font-weight: bold;
+    background-position: 25px 50% !important;
+}
+
+.aps-tree-container-body{
+    font-weight: bold;
+    padding: 0 5px;
+    height: 450px;
+    overflow: auto;
+}
+
+.aps-tree-container .input-text{
+    width: 90px;
+}
+
+.aps-tree-container-text-overflow{
+    /*以省略号替代截除部分*/
+    width: 90px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+}
+
+.aps-tree-container li[treenode] {
+	padding:2px 0px;
+}

@@ -1,0 +1,198 @@
+@CHARSET "UTF-8";
+
+@media screen, projection
+{
+/*+++++++++++++++++++++++++++定义屏幕的整体布局模板 (Start)+++++++++++++++++++++++++++*/
+/** 
+ * 为了防止,突然出现滚动条而导致页面布局改变,所以一开始就设置竖直滚动条是显示的 
+ */
+	body {
+		overflow-y: scroll;
+	}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************定义布局的基础样式***************************/
+/* Page margins and background */
+	body {
+		text-align: center;
+		background: #4d87c7 url("images/bg_blue.png") repeat-x top left fixed; padding:10px 0;
+	}
+
+/* Layout:Width, Background, Border */
+	.aps-page_margins {
+		min-width: 740px;
+		max-width: 80em; 
+		background-color: #fff;
+		margin: 0 auto;
+		text-align: left;
+	}
+	
+	.aps-page {
+		padding: 10px;
+	}
+
+/* Design of the Main Layout Elements */
+	#aps-header {
+		color: #000;
+	    background-color: #fff repeat-x top left;
+	    padding: 45px 2em 1em 20px;
+		position: relative;
+	}
+	
+	#aps-topnav {
+		background-color: transparent; 
+	  	color: #aaa; 
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+		text-align: right;
+	}
+	
+	#aps-nav ul { 
+		margin-left: 20px;
+	}
+	
+	#aps-breadcrumbs ul { 
+		margin-left: 20px;
+	}
+	
+	#aps-main {
+		background-color: #fff;
+		padding: 10px 0;
+	}
+	
+	#aps-footer {
+		color: #666;
+	    background: #f9f9f9;
+	    padding: 10px 20px;
+	    border-top: 5px #efefef solid;
+	    line-height: 1.5em;
+	}
+	
+	#aps-header, #aps-nav, #aps-breadcrumbs, #aps-main, #aps-footer { 
+		clear: both; 
+	}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************定制内容区域列布局样式***************************/
+	#aps-col1 {
+		width: 25%;
+	}
+	
+	#aps-col1_content {
+		padding: 10px 10px 10px 20px;
+	}
+	
+	#aps-col2 {
+		width: 25%;
+	}
+	
+	#aps-col2_content {
+		padding: 10px 20px 10px 10px;
+	}
+	
+	#aps-col3 {
+		margin: 0 25%;
+	}
+	
+	#aps-col3_content {
+		padding: 10px;
+	}
+	
+	#aps-header h1 {
+	    font-weight: bold;
+	    font-size: 2.5em;
+	    letter-spacing: -2px;
+	    line-height: 65%;
+	    color: #000;
+	}
+
+	#aps-header span { 
+		color:#999; 
+	}
+
+	#aps-topnav a { 
+		color: #999; 
+		font-weight: normal; 
+		background-color: transparent;
+		text-decoration: none;
+	}
+	#aps-topnav a:focus,
+	#aps-topnav a:hover,
+	#aps-topnav a:active {
+		text-decoration: underline;
+		background-color: transparent;
+	}
+	
+	#aps-footer a {
+		color: #999;
+		background-color: transparent;
+		font-weight:bold;
+	}
+	#aps-footer a:focus,
+	#aps-footer a:hover,
+	#aps-footer a:active {
+		color: #4D87C7;
+		background-color: transparent;
+		text-decoration: underline;
+	}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************定制Skiplinks导航样式***************************/
+	#aps-skiplinks a.aps-skip:focus, #aps-skiplinks a.aps-skip:active {
+		color: #fff; 
+		background-color: #333; 
+		border-bottom: 1px #000 solid;
+		padding: 10px 0;
+		text-decoration: none;
+	}
+	
+/*------------------------------------------------------------------------------------------------------*/
+
+/***************************针对纵屏的样式***************************/
+
+    body, html {
+        height: 100% !important; 
+        padding: 0;
+    }
+
+    .aps-page_margins {
+        position: relative !important;
+        min-height: 100%;
+        height: auto !important;
+        background: #fff;
+    }
+    
+    * html .aps-page_margins {
+    	height:100% !important; 
+    }
+
+    .aps-page {
+    	padding-bottom: 70px; 
+    }
+
+	#aps-footer {
+	    position:relative !important;
+	    min-width: 740px;
+	    max-width: 80em;
+	    margin: 0 auto;
+	    margin: -70px auto 0;
+	    background: #fff;
+	    border: 0 none;
+	    padding: 0;
+	}
+
+	#aps-footer_content {
+	    text-align: left;
+	    color:#666;
+	    background: #f9f9f9;
+	    padding: 10px 20px;
+	    border-top: 5px #efefef solid;
+	    margin: 0 10px;
+	}
+
+/*+++++++++++++++++++++++++++定义屏幕的整体布局模板 (End)+++++++++++++++++++++++++++*/
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.RoleMapper">
+
+	<resultMap type="com.syq.biz.bo.RoleBo" id="roleMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorName" column="operator_name" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+
+	<insert id="save" parameterType="com.syq.biz.domain.Role" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO role (
+		name
+		<if test="description != null and description != ''">
+			,description
+		</if>
+		<if test="operatorId != null and operatorId != ''">
+			,operator_id
+		</if>
+		<if test="operatorName != null and operatorName != ''">
+			,operator_name
+		</if>
+		)
+		VALUES
+		(
+		#{name}
+		<if test="description != null and description != ''">
+			,description
+		</if>
+		<if test="operatorId != null and operatorId != ''">
+			,operatorId
+		</if>
+		<if test="operatorName != null and operatorName != ''">
+			,operatorName
+		</if>
+		)
+	</insert>
+	
+	<delete id="deleteRoleAndRight" parameterType="long">
+		delete from role_and_right where role_id=#{roleId}
+	</delete>
+	
+	<insert id="saveRoleAndRight" parameterType="com.syq.biz.bo.RoleBo">
+		INSERT INTO role_and_right (role_id,right_id) 
+		values
+		<foreach collection="rights" item="rightId" index="index"
+			separator=",">
+			(#{id},#{rightId})
+		</foreach>
+	</insert>
+
+
+	<update id="update" parameterType="com.syq.biz.domain.Role">
+		UPDATE role
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="description != null and description != ''">description=#{description},</if>
+			<if test="operatorId != null and operatorId != ''">operator_id=#{operatorId},</if>
+			<if test="operatorName != null">operator_name=#{operatorName},</if>
+		</trim>
+		WHERE id=#{id}
+		
+	</update>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.RolePo"
+		resultMap="roleMap">
+		SELECT *
+		FROM
+		role
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				name like CONCAT('%',#{name},'%')
+			</if>
+
+			<if test="description != null and description != ''">
+				description like CONCAT('%',#{description},'%')
+			</if>
+
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getCount" parameterType="com.syq.pagination.common.RolePo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		role
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				name like CONCAT('%',#{name},'%')
+			</if>
+
+			<if test="description != null and description != ''">
+				description like CONCAT('%',#{description},'%')
+			</if>
+
+		</trim>
+	</select>
+	
+	<select id="selectById" parameterType="long"
+		resultType="com.syq.biz.domain.Role">
+		SELECT *
+		FROM
+		role
+		WHERE id=#{id}
+	</select>
+
+</mapper>

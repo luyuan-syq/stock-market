@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+/**
+ * @name: grid-op-menu
+ * @overview: 定义了全局的 grip中，操作按钮浮动出来的菜单样式
+ * @author: huiji
+ */
+@media screen , projection {
+	.om-grid .aps-op-btn {
+		font-weight: bold;
+	}
+	.om-grid .aps-op-menu {
+		display: none;
+		position: absolute;
+		background-color: #E6ECF5;
+		width: 100px;
+		border-image: initial;
+		font-weight: bold;
+	}
+	.om-grid .aps-op-menu>div {
+		background-position: 7px 5px;
+		background-repeat: no-repeat;
+		text-align: left;
+	}
+
+	.om-grid .aps-op-menu div:hover {
+		background-color: #4E76AD;
+		color: white;
+	}
+}

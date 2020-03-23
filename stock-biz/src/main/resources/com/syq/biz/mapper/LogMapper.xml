@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.LogMapper">
+
+	<resultMap type="com.syq.biz.domain.Log" id="logMap">
+		<id property="id" column="id"></id>
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorName" column="operator_name" />
+		<result property="operatorRole" column="operator_role" />
+		<result property="targetSubject" column="target_subject" />
+		<result property="content" column="content" />
+		<result property="contentDetail" column="content_detail" />
+		<result property="operationTime" column="operationTime" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.Log">
+		INSERT INTO log (
+		operator_id,
+		operator_name,
+		operator_role,
+		target_subject,
+		content,
+		content_detail,
+		operation_time,
+		create_time
+		)
+		VALUES
+		(
+		#{operatorId},
+		#{operatorName},
+		#{operatorRole},
+		#{targetSubject},
+		#{content},
+		#{contentDetail},
+		#{createTime}
+		)
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.LogPo"
+		resultMap="logMap">
+		SELECT *
+		FROM
+		log
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="operatorName != null and operatorName != ''">
+				operator_name like CONCAT('%',#{operatorName},'%')
+			</if>
+			
+			<if test="operatorRole != null and operatorRole != ''">
+				operator_role like CONCAT('%',#{operatorRole},'%')
+			</if>
+			
+			<if test="targetSubject != null and targetSubject != ''">
+				target_subject like CONCAT('%',#{targetSubject},'%')
+			</if>
+			
+			<if test="content != null and content != ''">
+				content like CONCAT('%',#{content},'%')
+			</if>
+			
+			<if test="contentDetail != null and contentDetail != ''">
+				content_detail like CONCAT('%',#{contentDetail},'%')
+			</if>
+
+			<if test="createBeginTime != null ">
+				and create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getCount" parameterType="com.syq.pagination.common.LogPo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		account
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="operatorName != null and operatorName != ''">
+				operator_name like CONCAT('%',#{operatorName},'%')
+			</if>
+			
+			<if test="operatorRole != null and operatorRole != ''">
+				operator_role like CONCAT('%',#{operatorRole},'%')
+			</if>
+			
+			<if test="targetSubject != null and targetSubject != ''">
+				target_subject like CONCAT('%',#{targetSubject},'%')
+			</if>
+			
+			<if test="content != null and content != ''">
+				content like CONCAT('%',#{content},'%')
+			</if>
+			
+			<if test="contentDetail != null and contentDetail != ''">
+				content_detail like CONCAT('%',#{contentDetail},'%')
+			</if>
+
+			<if test="createBeginTime != null ">
+				and create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+
+		</trim>
+	</select>
+
+</mapper>

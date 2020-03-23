@@ -1,0 +1,9 @@
+/* import core styles */
+@import url("../core/base.css");
+
+@import url("../../../navigation/nav_hlist.css");
+@import url("../../../navigation/nav_vlist.css");
+
+/* import your-screen.css here */
+
+@import url("../core/content.css");

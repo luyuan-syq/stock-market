@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.VisaCountryMapper">
+
+	<resultMap type="com.syq.biz.bo.VisaCountryBo" id="visaCountryBoMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="code" column="code" />
+		<result property="parentId" column="parent_id" />
+		<result property="needVisa" column="need_visa" />
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.domain.VisaCountry" id="visaCountryMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="code" column="code" />
+		<result property="parentId" column="parent_id" />
+		<result property="needVisa" column="need_visa" />
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.domain.VisaCountryData" id="visaCountryDataMap">
+		<result property="text" column="name" />
+		<result property="value" column="code" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.VisaCountry">
+		INSERT INTO visa_country (
+		NAME,
+		CODE,
+		PARENT_ID,
+		NEED_VISA
+		)
+		VALUES
+		(
+		#{name},
+		#{code},
+		#{parentId},
+		#{needVisa}
+		)
+	</insert>
+
+
+	<update id="update" parameterType="com.syq.biz.domain.VisaCountry">
+		UPDATE visa_country
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != ''">NAME=#{name},</if>
+			<if test="code != null and code != ''">CODE=#{code},</if>
+			<if test="parentId != null">PARENT_ID=#{parentId},</if>
+			<if test="needVisa != null">NEED_VISA=#{needVisa},</if>
+		</trim>
+		WHERE ID=#{id}
+		
+	</update>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.VisaCountryPo"
+		resultMap="visaCountryBoMap">
+		SELECT *
+		FROM
+		visa_country
+		<trim prefix="where" prefixOverrides="AND | OR">
+		
+			<if test="name != null and name != ''">
+				name like CONCAT('%',#{name},'%')
+			</if>
+			
+			<if test="parentId != null and parentId != ''">
+				parent_id = #{parentId}
+			</if>
+		</trim>
+	</select>
+
+	<select id="selectById" parameterType="long" resultMap="visaCountryMap">
+		SELECT *
+		FROM
+		visa_country
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectByCode" parameterType="java.lang.String" resultMap="visaCountryBoMap">
+		SELECT *
+		FROM
+		visa_country
+		WHERE code = #{code}
+	</select>
+
+	<delete id="deleteByIds" parameterType="long">
+		delete from visa_country where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="queryVisaCountryData" parameterType="java.lang.String" resultMap="visaCountryDataMap">
+		SELECT NAME AS TEXT,CODE AS VALUE FROM visa_country
+	</select>
+	
+	<select id="queryVisaCountryNamesForCode" parameterType="java.util.List" resultMap="visaCountryBoMap">
+		SELECT ID,NAME,CODE,PARENT_ID,NEED_VISA FROM visa_country where code in
+		<foreach item="code" collection="list" open="(" separator=","
+			close=")">
+			#{code}
+		</foreach>
+	</select>
+
+</mapper>

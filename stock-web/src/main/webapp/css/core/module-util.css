@@ -1,0 +1,136 @@
+@CHARSET "UTF-8";
+
+/**
+ * @name: util
+ * @overview: utils 样式，包括 收开 ，成功提示，“保存”按钮,三级菜单,overlay
+ * @author: yepeng
+ */
+@media screen , projection { /* 缩起列的开关样式   */
+	.aps-console-column-colspand,.aps-console-column-exspand {
+		width: 18px;
+		float: left;
+	}
+	.aps-console-column-colspand div {
+		background: url(../images/common/spand.png) no-repeat -11px 15px
+			!important;
+	}
+	.aps-console-column-exspand div {
+		background: url(../images/common/spand.png) no-repeat 1px 15px
+			!important;
+	}
+	.aps-console-column-colspand div,.aps-console-column-exspand div {
+		height: 35px !important;
+		width: 10px !important;
+		padding-top: 5px !important;
+		background-color: #CCCCCC !important;
+		cursor: pointer !important;
+		-moz-border-radius: 0px 2px 2px 0px !important;
+		-webkit-border-radius: 0px 2px 2px 0px !important;
+		border-radius: 0px 2px 2px 0px !important;
+		margin-right: 4px !important;
+	}
+	.aps-console-column-colspand div:hover,.aps-console-column-exspand div:hover
+		{
+		background-color: #000000 !important;
+	}
+
+	/*  showTip样式    */
+	div.aps-show-tip {
+		position: fixed;
+		top: 80px;
+		left: 500px; /* js会修改这个值 */
+		border: 1px solid #F0C36D;
+		background: #F9EDBE url("../images/common/OK.png") no-repeat 5px 50%;
+		padding: 8px 12px 8px 25px;
+		z-index: 9999;
+	}
+	div.aps-show-tip .aps-show-tip-content {
+		display: inline-block;
+		font: bold 13px arial, sans-serif;
+		color: #666;
+	}
+
+	/*  覆盖om提示样式 */
+	/* 不起作用 */
+	body div.om-messageTip .om-widget-header {
+		height: 40px;
+	}
+	body div.om-messageTip .om-messageTip-content {
+		padding-top: 0px;
+		padding-bottom: 20px;
+		/* 	overflow: hidden; */
+	}
+	body div.om-messageTip .om-messageTip-content .om-messageTip-image {
+		margin-top: 0px;
+		background-repeat: no-repeat;
+	}
+	body div.om-messageTip .om-messageTip-content .om-messageTip-content-body
+		{
+		padding-top: 5px;
+	}
+	body div.om-messageTip .om-messageTip-content .om-messageTip-content-body,body div.om-messageTip .om-messageTip-content .om-messageTip-image
+		{ /* 	margin-bottom: -50px;	
+	padding-bottom: 50px; */
+		
+	}
+
+	/* btn样式    */
+	.apusic-btn-deepblue {
+		padding-bottom: 30px;
+		font-size: 14px;
+	}
+
+	/* third nav 样好*/
+	.aps-buttonset {
+		width: 149px;
+		padding: 10px;
+		padding-left: 0;
+		background-color: #BFD8F6;
+		border: 1px solid #2170B5;
+	}
+	.aps-buttonset .aps-buttonset-button {
+		height: 24px;
+		padding: 2px 0 2px 14px;
+		margin-left: -14px;
+		line-height: 25px;
+	}
+	.aps-buttonset .aps-buttonset-label {
+		display: block;
+		padding-left: 14px;
+		cursor: pointer;
+	}
+	.aps-buttonset .unselect:hover .aps-buttonset-label {
+		background-color: #AECBF0;
+	}
+	.aps-buttonset .select {
+		background: transparent url(../images/ThirdNavi_arrow-transparent.png)
+			left center no-repeat;
+	}
+	.aps-buttonset .select .aps-buttonset-label {
+		background-color: #216FB4;
+		color: white;
+		font-weight: bold;
+	}
+
+	/* input tip样式 */
+	.aps-input-tip {
+		color: #999;
+		text-shadow: white 0 1px 0;
+	}
+	.aps-input-tip-enable {
+		color: #000;
+	}
+	
+	.aps-overlay {
+		display: none;
+		position: absolute;
+		top:0;
+        left:0;
+		opacity: .4;
+		filter: Alpha(Opacity=40);
+		background-color:gray;
+		width: 100%;
+		height: 100%;
+		z-index:9999;
+		}
+}

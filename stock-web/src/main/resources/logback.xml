@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <contextName>faff</contextName>
+  
+  <!-- 根据环境判断要加载的logback，如果没有指定profile，或者profile为dev，则为开发环境 -->
+  <if condition='isNull("profile") || property("profile").equals("dev")'>
+    <then>
+      <include resource="dev/logback-dev.xml" />
+    </then>
+    <else>
+      <include resource="logback-default.xml" />
+    </else>
+  </if>
+
+</configuration> 

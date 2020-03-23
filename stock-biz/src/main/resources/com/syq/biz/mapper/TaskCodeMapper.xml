@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.TaskCodeMapper">
+
+	<resultMap type="com.syq.biz.bo.TaskCodeBo" id="taskCodeBoMap">
+		<id property="id" column="id"></id>
+		<result property="taskCode" column="task_code" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="status" column="status" />
+		<result property="userName" column="userName" />
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.domain.TaskCode" id="taskCodeMap">
+		<id property="id" column="id"></id>
+		<result property="taskCode" column="task_code" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.TaskCode">
+		INSERT INTO task_code (
+		TASK_CODE,
+		CREATE_TIME,
+		OPERATOR_ID,
+		OPERATOR_TIME,
+		STATUS
+		)
+		VALUES
+		(
+		#{taskCode},
+		#{createTime},
+		#{operatorId},
+		#{operatorTime},
+		#{status}
+		)
+	</insert>
+	
+	<insert id="batchSave" parameterType="java.util.List">
+		INSERT INTO task_code (
+		TASK_CODE,
+		CREATE_TIME,
+		OPERATOR_ID,
+		OPERATOR_TIME,
+		STATUS
+		)
+		VALUES
+		<foreach collection="list" item="bo" index="index" separator=",">
+			(
+			#{bo.taskCode},
+			#{bo.createTime},
+			#{bo.operatorId},
+			#{bo.operatorTime},
+			#{bo.status}
+			)
+		</foreach>
+		
+	</insert>
+
+
+	<update id="update" parameterType="com.syq.biz.domain.TaskCode">
+		UPDATE task_code
+		<trim prefix="set" suffixOverrides=",">
+			<if test="operatorId != null and operatorId != ''">OPERATOR_ID=#{operatorId},</if>
+			<if test="operatorTime != null">OPERATOR_TIME=#{operatorTime},</if>
+			<if test="status != null and status != ''">STATUS=#{status},</if>
+		</trim>
+		WHERE TASK_CODE=#{taskCode}
+		
+	</update>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.TaskCodePo"
+		resultMap="taskCodeBoMap">
+		SELECT tc.*, a.user_name AS userName
+		FROM
+		task_code tc
+		LEFT JOIN task t
+		ON tc.task_code = t.task_code 
+		LEFT JOIN task_account ta 
+		ON t.id = ta.task_id
+		LEFT JOIN account a 
+		ON ta.account_id = a.id   
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="taskCode != null and taskCode != ''">
+				tc.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+
+			<if test="createBeginTime != null ">
+				and tc.create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and tc.create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+			
+			<if test="status != '' ">
+				and tc.status = #{status}
+			</if>
+			<if test="userName != null and userName != '' ">
+				and a.user_name like CONCAT('%',#{userName},'%')
+			</if>
+
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by tc.${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getCount" parameterType="com.syq.pagination.common.TaskCodePo"
+		resultType="int">
+		SELECT count(1)
+		FROM
+		task_code tc
+		LEFT JOIN task t
+		ON tc.task_code = t.task_code 
+		LEFT JOIN task_account ta 
+		ON t.id = ta.task_id
+		LEFT JOIN account a 
+		ON ta.account_id = a.id 
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="taskCode != null and taskCode != ''">
+				tc.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+
+			<if test="createBeginTime != null ">
+				and tc.create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and tc.create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+			<if test="userName != null and userName != '' ">
+				and a.user_name like CONCAT('%',#{userName},'%')
+			</if>
+
+		</trim>
+	</select>
+
+	<select id="selectAccountBoById" parameterType="long" resultMap="taskCodeBoMap">
+		SELECT *
+		FROM
+		account
+		WHERE id = #{id}
+	</select>
+
+	<delete id="deleteByIds" parameterType="long">
+		delete from account where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectByTaskCode" parameterType="com.syq.biz.domain.TaskCode"
+		resultMap="taskCodeMap">
+		SELECT *
+		FROM
+		task_code
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="taskCode != null and taskCode != ''">
+				task_code = #{taskCode}
+			</if>
+
+			<if test="status != '' ">
+				and status = #{status}
+			</if>
+
+		</trim>
+
+	</select>
+
+</mapper>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.TaskMapper">
+
+	<resultMap type="com.syq.biz.bo.TaskBo" id="taskBoMap">
+		<id property="id" column="id"></id>
+		<result property="taskName" column="task_name" />
+		<result property="instructionNo" column="instruction_no" />
+		<result property="headerName" column="header_name" />
+		<result property="headerIdCard" column="header_idCard" />
+		<result property="taskBeginTime" column="task_begin_time" />
+		<result property="taskEndTime" column="task_end_time" />
+		<result property="taskDescription" column="task_description" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="status" column="status" />
+		<result property="taskCode" column="task_code" />
+		<result property="createTime" column="create_time" />
+		<result property="taskCountry" column="task_country" />
+		<result property="groupUnit" column="group_unit" />
+		<result property="visitPurpose" column="visit_purpose" />
+		<result property="costSource" column="cost_source" />
+ 		<result property="instructionTime" column="instruction_time" />
+  		<result property="hasGroupMember" column="has_group_member" />
+  		<result property="hasFaffPlan" column="has_faff_plan" />
+  		<result property="transactor" column="transactor" />
+  		<result property="instructionNo" column="instruction_no" />
+  		<result property="accountName" column="account_name" />
+  		<result property="faffPlanNo" column="faff_plan_no" />
+  		<result property="taskCountryDay" column="task_country_day" />
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.bo.TaskCountryBo" id="taskCountryBoMap">
+		<id property="id" column="id"></id>
+		<result property="taskCode" column="task_code" />
+		<result property="instructionNo" column="instruction_no" />
+		<result property="taskCountry" column="task_country" />
+		<result property="expectStickDay" column="expect_stick_day" />
+		<result property="comment" column="comment" />
+		<result property="countryName" column="country_name" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.Task">
+		INSERT INTO task (
+		instruction_no,
+		operator_id,
+		operator_time,
+		status,
+		task_code,
+		create_time
+		<if test="taskName != null and taskName != ''">,task_name</if>
+		<if test="headerName != null and headerName != ''">,header_name</if>
+		<if test="headerIdCard != null and headerIdCard != ''">,header_idCard</if>
+		<if test="taskBeginTime != null">,task_begin_time</if>
+		<if test="taskEndTime != null">,task_end_time</if>
+		<if test="taskCountry != null and taskCountry != ''">,task_country</if>
+		<if test="taskDescription != null and taskDescription != ''">,task_description</if>
+		<if test="groupUnit != null and groupUnit != ''">,group_unit</if>
+		<if test="visitPurpose != null and visitPurpose != ''">,visit_purpose</if>
+		<if test="costSource != null and costSource != ''">,cost_source</if>
+		<if test="instructionTime != null ">,instruction_time</if>
+		<if test="hasGroupMember != null and hasGroupMember != ''">,has_group_member</if>
+		<if test="hasFaffPlan != null and hasFaffPlan != ''">,has_faff_plan</if>
+		<if test="transactor != null and transactor != ''">,transactor</if>
+		<if test="faffPlanNo != null and faffPlanNo != ''">,faff_plan_no</if>
+		)
+		VALUES
+		(
+		#{instructionNo},
+		#{operatorId},
+		#{operatorTime},
+		#{status},
+		#{taskCode},
+		#{createTime}
+		<if test="taskName != null and taskName != ''">,#{taskName}</if>
+		<if test="headerName != null and headerName != ''">,#{headerName}</if>
+		<if test="headerIdCard != null and headerIdCard != ''">,#{headerIdCard}</if>
+		<if test="taskBeginTime != null">,#{taskBeginTime}</if>
+		<if test="taskEndTime != null">,#{taskEndTime}</if>
+		<if test="taskCountry != null and taskCountry != ''">,#{taskCountry}</if>
+		<if test="taskDescription != null and taskDescription != ''">,#{taskDescription}</if>
+		<if test="groupUnit != null and groupUnit != ''">,#{groupUnit}</if>
+		<if test="visitPurpose != null and visitPurpose != ''">,#{visitPurpose}</if>
+		<if test="costSource != null and costSource != ''">,#{costSource}</if>
+		<if test="instructionTime != null ">,#{instructionTime}</if>
+		<if test="hasGroupMember != null and hasGroupMember != ''">,#{hasGroupMember}</if>
+		<if test="hasFaffPlan != null and hasFaffPlan != ''">,#{hasFaffPlan}</if>
+		<if test="transactor != null and transactor != ''">,#{transactor}</if>
+		<if test="faffPlanNo != null and faffPlanNo != ''">,#{faffPlanNo}</if>
+		)
+	</insert>
+
+	<update id="update" parameterType="com.syq.biz.domain.Task">
+		UPDATE task
+		<trim prefix="set" suffixOverrides=",">
+			<if test="operatorId != null and operatorId != ''">OPERATOR_ID=#{operatorId},</if>
+			<if test="operatorTime != null">OPERATOR_TIME=#{operatorTime},</if>
+			<if test="status != null and status != ''">STATUS=#{status},</if>
+			<if test="taskName != null and taskName != ''">task_name=#{taskName},</if>
+			<if test="headerName != null and headerName != ''">header_name=#{headerName},</if>
+			<if test="headerIdCard != null and headerIdCard != ''">header_idCard=#{headerIdCard},</if>
+			<if test="taskBeginTime != null">task_begin_time=#{taskBeginTime},</if>
+			<if test="taskEndTime != null">task_end_time=#{taskEndTime},</if>
+			<if test="taskDescription != null and taskDescription != ''">task_description=#{taskDescription},</if>
+			<if test="taskCountry != null and taskCountry != ''">task_country=#{taskCountry},</if>
+			<if test="taskCode != null and taskCode != ''">task_code=#{taskCode},</if>
+			<if test="groupUnit != null and groupUnit != ''">group_unit=#{groupUnit},</if>
+			<if test="visitPurpose != null and visitPurpose != ''">visit_purpose=#{visitPurpose},</if>
+			<if test="costSource != null and costSource != ''">cost_source=#{costSource},</if>
+			<if test="instructionTime != null">instruction_time=#{instructionTime},</if>
+			<if test="hasGroupMember != null and hasGroupMember != ''">has_group_member=#{hasGroupMember},</if>
+			<if test="hasFaffPlan != null and hasFaffPlan != ''">has_faff_plan=#{hasFaffPlan},</if>
+			<if test="transactor != null and transactor != ''">transactor=#{transactor},</if>
+			<if test="instructionNo != null and instructionNo != ''">instruction_no=#{instructionNo},</if>
+			<if test="faffPlanNo != null and faffPlanNo != ''">faff_plan_no=#{faffPlanNo},</if>
+		</trim>
+		WHERE id=#{id}
+
+	</update>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.TaskPo"
+		resultMap="taskBoMap">
+		SELECT  t.*, GROUP_CONCAT(a.user_name) as account_name,
+		   GROUP_CONCAT(CONCAT(CONCAT_WS(':',CAST(vc.name as char),CAST(tc.expect_stick_day as CHAR)),'天')) as task_country_day 
+		FROM
+		task t LEFT JOIN task_account ta ON t.id = ta.task_id 
+		      LEFT JOIN account a ON ta.account_id = a.id 
+		      LEFT JOIN task_country tc ON t.task_code = tc.task_code
+		      LEFT JOIN visa_country vc ON tc.task_country = vc.code
+		<trim prefix="where" prefixOverrides="AND | OR">
+
+			<if test="taskName != null and taskName != ''">
+				and t.task_name like CONCAT('%',#{taskName},'%')
+			</if>
+			<if test="accountName != null and accountName != ''">
+				and a.user_name like CONCAT('%',#{accountName},'%') 
+			</if>
+
+			<if test="taskCode != null and taskCode != ''">
+				and t.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+			
+			<if test="headerName != null and headerName != ''">
+				and t.header_name like CONCAT('%',#{headerName},'%')
+			</if>
+
+			<if test="taskCountry != null and taskCountry != ''">
+				and t.task_country like CONCAT('%',#{taskCountry},'%')
+			</if>
+
+			<if test="status != null and status != ''">
+				and t.status = #{status}
+			</if>
+			
+			<if test="instructionNo != null and instructionNo != ''">
+				and t.instruction_no = #{instructionNo}
+			</if>
+			
+			<if test="taskBeginTime != null ">
+				and t.task_begin_time <![CDATA[>=]]> #{taskBeginTime} 
+			</if> 
+			<if test="taskEndTime != null "> 
+				and t.task_end_time <![CDATA[>=]]> #{taskEndTime} 
+			</if>
+		</trim>
+            GROUP BY t.task_code
+		<if test="sortField != null and sortField != ''">
+			order by t.${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				t.${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getCount" parameterType="com.syq.pagination.common.TaskPo"
+		resultType="int">
+		SELECT count(distinct(t.task_code))
+		FROM
+		task t LEFT JOIN task_account ta ON t.id = ta.task_id LEFT JOIN account a ON ta.account_id = a.id
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="taskName != null and taskName != ''">
+				and t.task_name like CONCAT('%',#{taskName},'%') 
+			</if>
+			<if test="accountName != null and accountName != ''">
+				and a.user_name like CONCAT('%',#{accountName},'%') 
+			</if>
+
+			<if test="taskCode != null and taskCode != ''">
+				and t.task_code like CONCAT('%',#{taskCode},'%')
+			</if>
+
+			<if test="headerName != null and headerName != ''">
+				and t.header_name like CONCAT('%',#{headerName},'%')
+			</if>
+
+			<if test="taskCountry != null and taskCountry != ''">
+				and t.task_country like CONCAT('%',#{taskCountry},'%')
+			</if>
+			
+			<if test="status != null and status != ''">
+				and t.status = #{status}
+			</if>
+			
+			<if test="instructionNo != null and instructionNo != ''">
+				and t.instruction_no = #{instructionNo}
+			</if>
+			
+			<if test="taskBeginTime != null ">
+				and t.task_begin_time <![CDATA[>=]]> #{taskBeginTime} 
+			</if> 
+			<if test="taskEndTime != null "> 
+				and t.task_end_time <![CDATA[>=]]> #{taskEndTime} 
+			</if> 
+		</trim>
+	</select>
+
+	<select id="selectTaskBoById" parameterType="long" resultMap="taskBoMap">
+		SELECT t.*, GROUP_CONCAT(a.user_name) as account_name
+		FROM
+		task t 
+		LEFT JOIN task_account ta ON t.id = ta.task_id 
+		LEFT JOIN account a ON ta.account_id = a.id
+		WHERE t.id = #{id}
+		GROUP BY t.task_code
+	</select>
+	
+	
+	<select id="selectByCode" parameterType="string" resultMap="taskBoMap">
+		SELECT *
+		FROM
+		task
+		WHERE task_code = #{code}
+	</select>
+	
+	<select id="selectByInstructionNo" parameterType="string" resultMap="taskBoMap">
+		SELECT *
+		FROM
+		task
+		WHERE instruction_no = #{instructionNo}
+	</select>
+	
+	
+	<select id="selectById" parameterType="long" resultMap="taskBoMap">
+		SELECT t.*, GROUP_CONCAT(a.user_name) as account_name
+		FROM
+		task t LEFT JOIN task_account ta ON t.id = ta.task_id LEFT JOIN account a ON ta.account_id = a.id
+		WHERE t.id = #{id}
+		GROUP BY t.task_code
+	</select>
+	
+    <select id="selectTaskByPersonId" parameterType="long" resultMap="taskBoMap">
+		SELECT *
+		FROM
+		person person, task_and_person tap
+		WHERE person.id = tap.person_id and tap.person_id = #{personId}
+	</select>
+
+	<delete id="deleteByIds" parameterType="long">
+		delete from task where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<delete id="unAssign" parameterType="long">
+		delete from task_account where
+		task_id = #{task_id}
+	</delete>
+
+	<insert id="assign">
+		INSERT INTO task_account (
+		task_id,
+		account_id
+
+		)
+		VALUES
+		<foreach collection="accountIds" item="accountId" index="index"
+			separator=",">
+			(#{taskId},#{accountId})
+		</foreach>
+	</insert>
+	
+	<insert id="batchReplaceTaskCountrys" parameterType="com.syq.biz.bo.TaskCountryBo">
+		INSERT INTO task_country (
+		task_code,
+		instruction_no,
+		create_time
+		,task_country
+		,expect_stick_day
+		,comment
+		)
+		VALUES
+			(#{taskCode} ,#{instructionNo}, #{createTime}
+			, #{taskCountry}
+			, #{expectStickDay}
+			, #{comment}
+			)
+	</insert>
+	
+	<select id="selectTaskCountrysByTaskCode" parameterType="string" resultMap="taskCountryBoMap">
+		SELECT tc.*, vc.name AS country_name
+		FROM
+		task_country tc LEFT JOIN visa_country vc ON tc.task_country = vc.code
+		WHERE tc.task_code = #{taskCode}
+	</select>
+
+</mapper>

@@ -1,0 +1,145 @@
+@CHARSET "UTF-8";
+/***************************User Config***************************/
+.aps-security-tree-container{
+	float: left;
+}
+
+.clear-both{
+    clear: both;
+}
+
+.color-red{
+    color: red;    
+}
+
+.visible-hidden{
+    visibility: hidden;
+}
+
+.display-none{
+    display: none;
+}
+
+.aps-form table select.common-length{
+    width: 100px;
+}
+
+/* 添加 button 自动置地*/
+.aps-form div[template="default-value"], .aps-form .default-value{
+	position: relative;
+}
+
+.aps-form .default-value-action{
+	position: absolute;
+	bottom: 0px;
+	margin-left: 250px;
+}
+/***************************User Password Policy*****************/
+#password-policy div{
+    margin-top: 10px;
+}
+
+.password-header{
+    background-color: #DBE2EC;
+}
+
+#password-update-required-dlg{
+    padding: 16px;
+    text-indent: 2em;
+}
+
+#password-update-required-dlg{
+}
+/***************************User Field Custom********************/
+#field-content{
+    overflow: auto;
+    margin: 0;
+}
+.field-custom-left{
+    float: left;
+    height: 489px;
+}
+
+.category-header{
+}
+
+.field-category{
+    cursor: pointer;
+    margin: 5px 0;
+    padding: 5px;
+    *zoom: 1;
+}
+
+.field-category:HOVER{
+    background-color: #E8D6B7;
+}
+
+.field-category.selected{
+    background-color: #BBCBE2;
+    color: #000000;
+    font-weight: bold;  
+}
+
+.category-title{
+    line-height: 20px;
+    height: 20px;
+}
+
+.category-action{
+    float: right;
+}
+
+.field-category.selected .category-action{
+    display: block;
+}
+
+.default-value-delete-btn{
+    border: 0;
+    width: 16px;
+    height: 18px;
+    background: transparent url("../../images/16/undeploy.png") no-repeat left center;
+    cursor: pointer;
+}
+
+.category-title-update{
+    display: none;
+}
+
+.category-body{
+}
+
+/*.aps-form.user-field-form table td.second{
+    width: 250px;
+}
+
+#navigation-config .aps-form table td.first{
+    width: 80px;
+}*/
+
+.category-delete-btn{
+    border:0;
+    background: transparent url("../../images/16/delete2.png") no-repeat left center;
+    width: 16px;
+    height: 16px;
+}
+
+.category-delete-btn:HOVER{
+    background: transparent url("../../images/16/delete2_hover.png") no-repeat left center;
+}
+
+/**增加邮件配置的样式 begin*/
+.sub-col2l {
+	float: left;
+	width: 70%;
+}
+
+.sub-col2r {
+	float: right;
+	margin-left: -5px;
+}
+/**增加邮件配置的样式 end*/
+
+#aps-portal-manager-header .om-panel-body{
+    padding-left: 0;
+    padding-right: 0;
+}

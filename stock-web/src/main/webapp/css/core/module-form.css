@@ -1,0 +1,177 @@
+@CHARSET "UTF-8";
+
+/**
+ * @name: form
+ * @overview: 定义了全局的form 表单样式
+ * @author: huiji
+ */
+/** 使用SmartSprites   */
+/** sprite: aps-form; sprite-image: url('./${sprite}.png'); sprite-layout: vertical */
+@media screen , projection { /*.aps-form {
+	}*/
+	textarea {
+		resize: none;
+	}
+	.aps-form table {
+		width: 100%;
+	}
+	.aps-form table tr {
+		height: 28px;
+	}
+
+	/* 换行 显示提示表单 */
+	.aps-form-ss table tr {
+		height: 50px;
+	}
+	.aps-form .table-title {
+		height: 20px;
+		margin: 20px 6px 6px 12px;
+		padding: 0 0 5px 2px;
+		font-size: 16px;
+		/*border-bottom: 1px #b2c2d2 solid;*/
+		background: transparent url(../images/line.jpg) repeat-x left bottom;
+	}
+
+	/*小号的form 标题*/
+	.aps-form-min .table-title {
+		height: 18px;
+		font-size: 14px;
+		margin: 20px 6px 6px 4px;
+	}
+
+	/* title 贴近上面*/
+	.aps-form .closed-top-title {
+		margin-top: 6px;
+	}
+	.aps-form-ss table td {
+		vertical-align: top;
+	}
+	.aps-form table td {
+		vertical-align: top;
+	}
+	.aps-form td.first {
+		padding-left: 20px;
+		padding-right: 5px;
+		/*min-width:65px;*/
+		width: 40px;
+		*width: 2%;
+		white-space: nowrap;
+		font-weight: bold;
+		color: black;
+	}
+	.aps-form td.second {
+		width: 170px;
+	}
+
+	/* 换行 显示提示表单 */
+	.aps-form-ss td.second {
+		width: 100%;
+	}
+	.aps-form td.third { /* 目前 没有样式 */
+		vertical-align: middle;
+	}
+	.aps-form td.third>* {
+		position: relative;
+		left: 0;
+		left: -5px\9;
+		top: -3px;
+		*top: -2px;
+	}
+	.aps-form td.second label {
+		
+	}
+	.aps-form table input[type=checkbox],.aps-form table input[type=radio] {
+		vertical-align: middle;
+		border-width: 0px;
+		width: 15px;
+		margin: 0px 2px;
+	}
+	.aps-form table input[type=text],.aps-form table input[type=password] {
+		height: 20px;
+		vertical-align: middle;
+		border: 1px solid #7B8FAB;
+		line-height: 20px;
+		width: 148px;
+	}
+	.aps-form  input[type=text],.aps-form  input[type=password],.aps-form  textarea {
+		padding: 0 2px;
+	}
+	.aps-form  input[type=text]:focus,.aps-form  input[type=password]:focus,.aps-form  textarea:focus {
+		background-color: #f5f0dd;
+	}
+	.aps-form table textarea {
+		height: 80px;
+		width: 148px; +
+		width: 150px;
+		*width: 148px;
+		border: 1px solid #7B8FAB;
+	}
+
+	/* 第一列 靠 右*/
+	.aps-form .text-right td.first {
+		text-align: right;
+	}
+
+	/* om-combo 大小resize*/
+	.aps-form .om-combo, .aps-form .om-calendar {
+		vertical-align: top;
+		border: 1px solid #7B8FAB;
+		/*height: 20px;
+		width: 148px; +
+		width: 151px;
+		*width: 148px;*/
+		width: 151px;
+	}
+	.aps-form .om-combo .om-combo-trigger, .aps-form .om-calendar .om-calendar-trigger {
+		width: 19px;
+	}
+	.aps-form table .om-combo input, .aps-form table .om-calendar input {
+		border: none;
+		height: 20px;
+		*height: 18px;
+		width: 132px;
+		width: 128px\9; /* all ie*/
+	}
+
+	/* ie 9 hack */
+	:root .aps-form table .om-combo input {
+		width: 132px;
+	}
+	.aps-form .aps-form-readonly[readonly],.aps-form .aps-form-readonly[readonly]:FOCUS {
+		background-color: #DBDBDB;
+	}
+
+	/*************************** 表单验证所需要的样式 ***************************/
+	.aps-form label.aps-form-prompt {
+		color: #828282;
+		display: none;
+		padding-left: 20px;
+		white-space: nowrap;
+		background-repeat: no-repeat;
+	    background-image: url("../images/16/attention.png");/** 暂时不使用smartsprites，因为会多一个像素sprite-ref: aps-form; */
+	}
+	.aps-form label.aps-valid-error {
+		color: #f00;
+		background-repeat: no-repeat;
+	    background-image: url("../images/error.png");
+		padding-left: 20px;
+		*padding-bottom: 3px;
+		white-space: nowrap;
+	}
+	.aps-form label.aps-valid-success {
+		*zoom: 1;
+		*display: inline;
+		width: 20px;
+		background-repeat: no-repeat;
+	    background-image: url("../images/ok.png");
+		padding-left: 20px;
+		white-space: nowrap;
+	}
+	.aps-form .require-mark {
+		color: red;
+		display: inline-block;
+		width: 5px;
+		vertical-align: middle;
+		/* margin-left: 5px;*/
+	}
+}

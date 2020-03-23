@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+/* 必须导入iehacks.css */
+@import url("../../apsl/core/iehacks.css");
+
+@media screen, projection
+{
+	/* 此处可以添加自定义的Hacks */
+	* html #aps-col3 { height: 1%; }
+    * html #aps-col1 { margin-right: -3px; }
+    * html #aps-col3 { margin-left: 24%; }
+    
+    * html .aps-page_margins {
+    	width: 80em;
+    }
+}

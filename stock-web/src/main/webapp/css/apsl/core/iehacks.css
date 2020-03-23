@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+@media all
+{
+	
+	body { o\verflow:visible; }
+    * html iframe,
+    * html frame { overflow:auto; }
+    * html input,
+    * html frameset { overflow:hidden; }
+    * html textarea { overflow:scroll; overflow-x:hidden; }
+
+/***************************Stability fixes with 'position:relative'**************************/
+    body, #aps-main { position:relative; }
+    * html body { position:static; }
+
+/***************************Clearfix adjustents for containing floats in IE**************************/
+    .aps-clearfix { height:1%; }
+ 
+/***************************Special class for oversized content element**************************/
+	.aps-slidebox {
+	  position:relative;
+	  margin-right:-1000px;
+	  height:1%;
+	}
+
+/***************************Bugfix for partially displayed column separators**************************/
+	* html #aps-col1,
+	* html #aps-col2,
+	* html #aps-col3 { position:relative; }
+
+/***************************Preventing several css bugs by forcing "hasLayout"**************************/
+	body { height:1%; }
+	.aps-page_margins, .aps-page, #aps-header, #aps-nav, #aps-breadcrumbs, #aps-main, #aps-footer { zoom:1; }  /* IE6 & IE7    */
+	* html .aps-page_margins, * html .aps-page { height:1%; hei\ght:auto; }  /* IE 5.x & IE6 | IE6 only */
+	* html #aps-header, * html #aps-nav, * html #aps-breadcrumbs, * html #aps-main, * html #aps-footer { width:100%; wid\th:auto; }  /* IE 5.x & IE6 | IE6 only */
+    .aps-subc, .aps-subcl, .aps-subcr { height:1%; }
+    
+/***************************Form related bugfixes**************************/
+	fieldset, legend { position:relative; }
+
+	html #aps-ie_clearing {
+	    position:static;
+	    display:block;
+	    \clear:both;
+	    width:100%;
+	    font-size:0px;
+		margin:-2px 0 -1em 1px;
+	}
+
+    * html #aps-ie_clearing { margin:-2px 0 -1em 0; }
+    
+    #aps-col3_content { margin-bottom:-2px; }
+
+    html { margin-right:1px; }
+    * html { margin-right:0; }
+
+    #aps-col3 { position:relative; }
+
+    * html body a, * html body a:hover { background-color:transparent; }
+
+}
+
+@media screen, projection
+{
+
+	#aps-col1, #aps-col2 { display:inline; }
+
+	.aps-col_left, .aps-col_right { 
+		display: inline;
+	}
+	
+	.aps-layout_left, .aps-layout_left { 
+		display: inline;
+	}
+
+    * html .aps-equalize, * html .aps-equalize .aps-subcolumns { 
+    	overflow: visible; 
+    	display: block; 
+    }
+    
+    .aps-equalize, .aps-equalize .aps-subcolumns { 
+    	overflow: hidden;
+		display: block; 
+    }
+
+	.aps-equalize .aps-col_left {
+		float: left; 
+		display: inline;
+	    padding-bottom: 32767px;
+	    margin-bottom: -32767px;
+	}
+	
+	.aps-equalize .aps-layout_left {
+		float: left; 
+		display: inline;
+	    padding-bottom: 32767px;
+	    margin-bottom: -32767px;
+	}
+  
+  	.aps-equalize .aps-col_right {
+	    float: right; 
+	    margin-left: -5px; 
+	    display: inline;
+	    padding-bottom: 32767px;
+	    margin-bottom: -32767px;
+	}
+	
+  	.aps-equalize .aps-layout_left {
+	    float: right; 
+	    margin-left: -5px; 
+	    display: inline;
+	    padding-bottom: 32767px;
+	    margin-bottom: -32767px;
+	}
+
+	.aps-no-ie-padding .aps-col_left, .aps-no-ie-padding .aps-col_right {
+	    padding-bottom:0;
+	    margin-bottom:0;
+	}
+	
+	.aps-no-ie-padding .aps-layout_left, .aps-no-ie-padding .aps-layout_left {
+	    padding-bottom:0;
+	    margin-bottom:0;
+	}
+
+    * html #aps-col1_content,
+    * html #aps-col2_content,
+    * html #aps-col3_content { word-wrap:break-word; }
+    
+    * html .aps-subc,
+    * html .aps-subcl,
+    * html .aps-subcr { word-wrap:break-word; o\verflow:hidden; }
+    
+}

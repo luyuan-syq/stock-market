@@ -1,0 +1,413 @@
+@CHARSET "UTF-8";
+
+/** 使用SmartSprites,请勿format此文件 */
+@media screen , projection { 
+	/** 
+	  * 为了防止,突然出现滚动条而导致页面布局改变,所以一开始就设置竖直滚动条是显示的 
+	  */
+	body {
+		overflow-y: scroll;
+	}	
+	a:HOVER {
+		outline: none;
+	}
+	/*------------------------------------------------------------------------------------------------------*/
+	
+	/***************************定义布局的基础样式***************************/
+	body {
+		padding: 10px 0;
+	}
+	.wzax-page {
+		padding: 0 10px 0 0;
+	}
+	#wzax-scrolltop {
+		width: 64px;
+		height: 64px;
+		cursor: pointer;
+		position: fixed;
+		right: 62px;
+		bottom: 100px;
+		background: transparent url("../../images/up_64_2.png") no-repeat center;
+	}
+	#wzax-scrolltop:hover {
+		background: transparent url("../../images/up_64.png") no-repeat center;
+	}
+	/* 高度40px是由header_bg.jpg的高度所决定 , 该图片大小是 1*40 */
+	#wzax-topnav {
+		width: 100%;
+		background-color: transparent;
+		color: #aaa;
+		text-align: right;
+		background: transparent url("../../images/header_bg.jpg") repeat-x left top;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 300;
+		height: 50px;
+	}
+	/* 设置Logo样式 */
+	#wzax-logo-wrapper {
+		position: absolute;
+		top: 5px;
+		left: 10px;
+		cursor: pointer;
+	}
+	#wzax-logo-wrapper:hover {
+		cursor: pointer;
+	}
+	#wzax-logo-wrapper #wzax-logo-link {
+		display: block;
+		width: 222px;
+		height: 26px;
+		background: transparent url("../../images/logo.png") no-repeat left top;
+	}
+	#wzax-topnav.selected {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+	/* 图钉样式 */
+	#wzax-nail {
+		width: 28px;
+		height: 40px;
+		padding: 0 30px 0 0;
+		background-repeat: no-repeat;
+        background-position: center;
+	    background-image: url("../../images/nail.png");
+	}
+	#wzax-nail:hover {
+		background: transparent url("../../images/nail_hover.png") no-repeat center;
+	}
+	#wzax-topnav.selected #wzax-nail {
+		background: transparent url("../../images/nail_selected.png") no-repeat
+			center;
+	}
+	.wzax-hlist {
+		background-color: #E8E8E8;
+		border-top: 1px #DBDBDB solid;
+		border-bottom: 1px #DBDBDB solid;
+	}
+	#wzax-main {
+		padding: 0;
+	}
+	#wzax-header,#wzax-nav,#wzax-breadcrumbs,#wzax-main,#wzax-footer {
+		clear: both;
+	}
+
+	/*------------------------------------------------------------------------------------------------------*/
+	
+	/***************************定制内容区域列布局样式***************************/
+	#wzax-col1 {
+		width: 170px;
+	}
+	#wzax-col1_content {
+		padding: 0px;
+	}
+	#wzax-col2 {
+		float: left;
+		width: 15px;
+	}
+	#wzax-col2_content {
+		
+	}
+	#wzax-col3 {
+		margin: 0 10px 0 190px;
+	}
+	#wzax-col3_content {
+		padding: 10px 0px 0px 0px;
+	}
+
+	/*------------------------------------------------------------------------------------------------------*/
+
+	/***************************定制左导航样式***************************/
+	#wzax-leftnav a {
+		color: #1E1E1E;
+		text-decoration: none;
+	}
+	#wzax-leftnav .nav-panel {
+		padding: 0;
+	}
+	#wzax-leftnav .nav-panel .nav-item {
+		height: 30px;
+		line-height: 30px;
+		cursor: pointer;
+		list-style-type: none;
+		position: relative;
+		padding-left: 30px;
+	}
+	#wzax-leftnav .nav-panel .nav-item a {
+		display: block;
+		padding-left: 30px;
+	}
+	#wzax-leftnav .nav-panel .nav-item:hover {
+		background-color: #C4D6EC;
+	}
+	#wzax-leftnav .nav-item.nav-item-selected {
+		height: 30px;
+		border-right: none; 
+	 background-repeat: repeat-x;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -0px;
+	}
+	#wzax-leftnav .nav-panel .nav-item-selected .item-left {
+		height: 30px;
+		position: absolute;
+		left: 0;
+		width: 9px;
+		background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -30px;
+	}
+	#wzax-leftnav .nav-panel .nav-item-selected .item-right {
+		height: 30px;
+		position: absolute;
+		right: 0;
+		background: transparent url("../../images/SecNavi_arrow.png")
+			no-repeat scroll 1px center;
+		width: 11px;
+	}
+	#wzax-leftnav .nav-panel .nav-item-selected .item-middle {
+		position: absolute;
+		height: 30px;
+	}
+	#wzax-leftnav .nav-panel .nav-item-selected .item-middle a {
+		color: #fff;
+	}
+	
+    #wzax-leftnav .item-pic {
+        float: left;
+        width: 16px;    
+        height: 16px;
+        margin-top: 7px;
+    }
+   /* background property scroll transparent is default   -${md5} */
+	/* 左导航图片 */
+	/* 索引为0的panel */
+	#wzax-leftnav .panel-0 {
+	  background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -60px;
+	}
+	
+		/* 索引为1的panel */
+	#wzax-leftnav .panel-1 {
+	   background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -76px;
+	}
+	
+		/* 索引为2的panel */
+	#wzax-leftnav .panel-2 {
+	  background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -92px;
+	}
+	
+		/* 索引为3的panel */
+	#wzax-leftnav .panel-3 {
+		  background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -108px;
+	}
+	
+	#wzax-leftnav .personalInfo {
+	  background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -124px;
+	}
+	
+	#wzax-leftnav .changepassword {
+	  background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -140px;
+	}
+	
+	#wzax-leftnav .SSOChangepassword {
+	 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -156px;
+	}
+	
+	#wzax-leftnav .sitesetting {
+		 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -172px;
+	}
+	
+	#wzax-leftnav .membermanager {
+			 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -188px;
+	}
+	
+	#wzax-leftnav .pagemanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -204px;
+	}
+	
+	#wzax-leftnav .constraintmanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -220px;
+	}
+	
+	#wzax-leftnav .contentmanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -236px;
+	}
+	
+	#wzax-leftnav .sitestatistics {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -252px;
+	}
+
+	#wzax-leftnav .portalsetting {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -268px;
+	}
+
+	#wzax-leftnav .user_group {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -284px;
+	}
+	
+	#wzax-leftnav .rolemanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -300px;
+	}
+	
+	#wzax-leftnav .sitemanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -316px;
+	}
+	
+	#wzax-leftnav .pluginmanager {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -332px;
+	}
+	
+	#wzax-leftnav .ssosetting {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -348px;
+	}
+	
+	#wzax-leftnav .plugininstall {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -364px;
+	}
+	
+	#wzax-leftnav .portalconfig {
+				 background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -380px;
+	}
+	
+	#wzax-leftnav .systemconfig {
+	background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -396px;
+	}
+	
+	#wzax-leftnav .systemmonitor {
+	background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -412px;
+	}
+	
+	#wzax-leftnav .license {
+	background-repeat: no-repeat;
+  background-image: url('../../images/wzax-console-menu.png');
+  background-position: left -428px;
+	}
+
+	/***************************定制折叠左导航的开关样式: 覆盖默认样式***************************/
+	.wzax-console-column-switch-layout-console div {
+		height: 26px !important;
+		padding-top: 9px !important;
+	}
+	.wzax-console-column-colspand-layout-console div {
+		background-position: -11px 13px !important;
+	}
+	.wzax-console-column-exspand-layout-console div {
+		background-position: 1px 13px !important;
+	}
+
+	/*------------------------------------------------------------------------------------------------------*/
+
+	/***************************定制面包屑导航样式***************************/
+	#wzax-breadcrumbs {
+		height: 22px;
+		line-height: 22px;
+		background-color: #DBE2EC;
+		border: 1px solid #B9C1CC;
+		padding: 0 10px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+	}
+	#wzax-breadcrumbs a {
+		color: #333;
+		/*text-shadow: #fff 0 1px 0;*/
+		text-decoration: none;
+	}
+	#wzax-breadcrumbs a:HOVER {
+		color: #08c;
+	}
+	#wzax-breadcrumbs .wzax-breadcrumbs-nav ul {
+		margin: 0;
+	}
+	#wzax-breadcrumbs li {
+		list-style: none;
+		background: url("../../images/crumb.png") no-repeat 100% 50%;
+		display: inline-block;
+		padding: 0 20px 0 5px;
+	}
+	#wzax-breadcrumbs li.last {
+		background: none;
+	}
+	#wzax-breadcrumbs li.last a {
+		cursor: default;
+		color: #8B8C90;
+	}
+
+	/*------------------------------------------------------------------------------------------------------*/
+
+	/***************************针对纵屏的样式***************************/
+
+	/*原理是将主内容区域.syq-page添加样式padding-bottom: xpx;然后将#syq-footer添加样式margin: -xpx;从而令Footer黏着在主内容区域下*/
+	body,html {
+		height: 100% !important;
+		padding: 0;
+	}
+	.wzax-page_margins {
+		padding-top: 55px;
+		text-align: left;
+		min-width: 980px;
+		margin: 0 auto;
+		position: relative !important;
+		min-height: 100%;
+		height: auto !important;
+		
+	}
+	.wzax-page_margins_exspand {
+		background: transparent;
+	}
+	* html .wzax-page_margins {
+		height: 100% !important;
+	}
+	
+	
+	/* buttonbar 间距*/
+	.default-bar-space {
+		margin-bottom : 10px ; 
+	}
+}

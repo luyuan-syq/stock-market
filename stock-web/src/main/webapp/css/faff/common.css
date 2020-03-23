@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+/********************* begin: custom-field样式 **************************/
+/******* 本来的意图是实现字符数过多时自动换行的, 目前功能还没有实现  ******/
+/* .aps-form.principal-dialog-form table {
+    width: 100%;
+    table-layout: fixed;
+}
+    
+.aps-form.principal-dialog-form table td {
+    word-break: break-all;
+    word-wrap: word-break;
+} */
+
+.aps-form .second label.radio,
+.aps-form .second label.checkbox {
+	display: inline-block;
+}
+/* 覆盖控制台form样式 */
+.aps-form table input.input-align {
+	_margin-left: -3px;
+	margin-top: -3px;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+.aps-form .category-collapse{
+	float: right;
+	cursor: pointer;
+	margin-top: 5px;
+	background: url("images/sort_arrow.png") no-repeat center 3px;;
+	height: 10px;
+	width: 22px;
+}
+.aps-form .category-expand{
+	float: right;
+	cursor: pointer;
+	margin-top: 5px;
+	background: url("images/sort_arrow.png") no-repeat center -5px;;
+	height: 10px;
+	width: 22px;
+}
+/********************* end: custom-field样式 **************************/
+
+/********************* begin: 表格内操作按钮下拉菜单样式 **************************/
+.aps-op-menu .view{
+	background-image: url("images/view_16.png");
+}
+.aps-op-menu .edit{
+	background-image: url("images/edit_16.png");
+}
+.aps-op-menu .delete{
+	background-image: url("images/cancel_16.png");
+}
+.aps-op-menu .reset-password{
+	background-image: url("images/cred.png") ;
+}
+.aps-op-menu .cancel-manager{
+	background: url("images/admin_16.png") no-repeat scroll;
+}
+.aps-op-menu .set-manager{
+	background: url("images/admin_16.png") no-repeat scroll;
+}
+.aps-op-menu .horizontal-separator{
+}
+/********************* end: 表格操作按钮下拉菜单样式 **************************/
+
+/********************* begin: belongTo & manager item **************************/
+.label-component-container{
+	display: inline-block;
+	margin-right: 5px;
+	height: 20px;
+	line-height: 20px;
+	cursor: pointer;
+}
+.label-component-container .left,
+.label-component-container .right {
+	display: block;
+	width: 5px;
+	height: 22px
+}
+.label-component-container .left {
+	float: left;
+	background: url("images/inline-item.png") no-repeat 0 0;
+}
+.label-component-container .right {
+	float: left;
+	background: url("images/inline-item.png") no-repeat 100% -48px;
+}
+.label-component-container a {
+	display: block;
+	float: left;
+	background: url("images/inline-item.png") repeat-x 0 -24px;
+}
+.component-remover{
+	position: absolute;
+	background: url("images/inline-remove.png") no-repeat;
+	display: inline-block;
+	color: #B2D9F0;
+	margin-left: -5px;
+	margin-top: -4px;
+	width: 10px;
+	height: 10px;
+}
+.component-remover:hover{
+	color: #FCB220;
+}
+
+.belong-to-group-label,
+.belong-to-role-label{
+	cursor: pointer;
+	text-decoration: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #0044098;
+}
+.belong-to-group-label:hover,
+.belong-to-role-label:hover{
+	cursor: pointer;
+	text-decoration: none;
+	color: #000;
+}
+.label-component-container .manager-marker{
+	display: block;
+	float: left;
+	height: 20px;
+	/* padding-left: 20px;
+	background: url("images/admin_16.png") no-repeat 0px 2px; */
+}
+/********************* end: belongTo & manager item **************************/

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.PersonMapper">
+
+	<resultMap type="com.syq.biz.bo.PersonBo" id="personBoMap">
+		<id property="id" column="id"></id>
+		<result property="userName" column="user_name" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="contactPhone" column="contact_phone" />
+		<result property="mobile" column="mobile" />
+		<result property="contactEmail" column="contact_email" />
+		<result property="deptName" column="dept_name" />
+		<result property="idNumber" column="id_number" />
+		<result property="sexey" column="sexey" />
+		<result property="birthday" column="birthday" />
+		<result property="placeBirth" column="place_birth" />
+		<result property="business" column="business" />
+		<result property="identity" column="identity" />
+		<result property="isLeader" column="is_leader" />
+	</resultMap>
+	
+	<resultMap type="com.syq.biz.bo.AuditPersonBo" id="auditPersonBoMap">
+		<id property="id" column="id"></id>
+		<result property="userName" column="user_name" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="contactPhone" column="contact_phone" />
+		<result property="mobile" column="mobile" />
+		<result property="contactEmail" column="contact_email" />
+		<result property="deptName" column="dept_name" />
+		<result property="idNumber" column="id_number" />
+		<result property="passportStatus" column="passport_status" />
+		<result property="flowStatus" column="flow_status" />
+		<result property="flowMsg" column="flow_msg" />
+		<result property="taskId" column="task_id" />
+		<result property="sexey" column="sexey" />
+		<result property="birthday" column="birthday" />
+		<result property="placeBirth" column="place_birth" />
+		<result property="business" column="business" />
+		<result property="identity" column="identity" />
+		<result property="isLeader" column="is_leader" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.Person" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO person (
+		USER_NAME,
+		CREATE_TIME,
+		OPERATOR_ID,
+		OPERATOR_TIME,
+		ID_NUMBER
+		<if test="deptName != null and deptName != ''">
+			,DEPT_NAME
+		</if>
+		<if test="contactPhone != null and contactPhone != ''">
+			,CONTACT_PHONE
+		</if>
+		<if test="mobile != null and mobile != ''">
+			,MOBILE
+		</if>
+		<if test="contactEmail != null and contactEmail != ''">
+			,CONTACT_EMAIL
+		</if>
+		,SEXEY
+		,BIRTHDAY
+		,PLACE_BIRTH
+		,BUSINESS
+		,IDENTITY
+		,IS_LEADER						
+		)
+		VALUES
+		(
+		#{userName},
+		#{createTime},
+		#{operatorId},
+		#{operatorTime},
+		#{idNumber}
+		<if test="deptName != null and deptName != ''">
+			,#{deptName}
+		</if>
+		<if test="contactPhone != null and contactPhone != ''">
+			,#{contactPhone}
+		</if>
+		<if test="mobile != null and mobile != ''">
+			,#{mobile}
+		</if>
+		<if test="contactEmail != null and contactEmail != ''">
+			,#{contactEmail}
+		</if>
+		,#{sexey}
+		,#{birthday}
+		,#{placeBirth}
+		,#{business}
+		,#{identity}
+		,#{isLeader}
+		)
+	</insert>
+	
+	<insert id="saveTaskAndPerson">
+	   insert into task_and_person(task_id,person_id) value(#{0},#{1})
+	</insert>
+
+
+	<update id="update" parameterType="com.syq.biz.domain.Person">
+		UPDATE person
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName != null and userName != ''">USER_NAME=#{userName},</if>
+			<if test="deptName != null and deptName != ''">DEPT_NAME=#{deptName},</if>
+			<if test="operatorId != null and operatorId != ''">OPERATOR_ID=#{operatorId},</if>
+			<if test="operatorTime != null">OPERATOR_TIME=#{operatorTime},</if>
+			<if test="contactPhone != null and contactPhone != ''">CONTACT_PHONE=#{contactPhone},</if>
+			<if test="mobile != null and mobile != ''">MOBILE=#{mobile},</if>
+			<if test="contactEmail != null and contactEmail != ''">CONTACT_EMAIL=#{contactEmail},</if>
+			<if test="sexey != null ">SEXEY=#{sexey},</if>
+			<if test="birthday != null ">BIRTHDAY=#{birthday},</if>
+			<if test="placeBirth != null and placeBirth != ''">PLACE_BIRTH=#{placeBirth},</if>
+			<if test="identity != null ">IDENTITY=#{identity},</if>
+			<if test="isLeader != null">IS_LEADER=#{isLeader},</if>
+		</trim>
+		WHERE id=#{id}
+		
+	</update>
+
+	<select id="selectByCondition" parameterType="com.syq.pagination.common.PersonPo"
+		resultMap="auditPersonBoMap">
+		SELECT p.*, tp.task_id, pa.passport_status, pa.flow_status, pa.flow_msg
+		FROM
+		  person p
+		LEFT JOIN 
+		  passport pa
+		ON p.id_number = pa.id_number 
+		LEFT JOIN 
+		  task_and_person tp 
+		ON p.id = tp.person_id 
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="userName != null and userName != ''">
+				p.user_name like CONCAT('%',#{userName},'%')
+			</if>
+		     <if test="taskId != null" >
+		       and tp.task_id = #{taskId,jdbcType=BIGINT}
+		     </if>
+			<if test="createBeginTime != null ">
+				and p.create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and p.create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+			
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by p.${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="getCount" parameterType="com.syq.pagination.common.PersonPo"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		  person p
+		LEFT JOIN 
+		  passport pa
+		ON p.id_number = pa.id_number 
+		LEFT JOIN 
+		  task_and_person tp 
+		ON p.id = tp.person_id 
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="userName != null and userName != ''">
+				p.user_name like CONCAT('%',#{userName},'%')
+			</if>
+		     <if test="taskId != null" >
+		       and tp.task_id = #{taskId,jdbcType=BIGINT}
+		     </if>
+			<if test="createBeginTime != null ">
+				and p.create_time <![CDATA[>=]]>
+				#{createBeginTime}
+			</if>
+			<if test="createEndTime != null ">
+				and p.create_time <![CDATA[<=]]>
+				#{createEndTime}
+			</if>
+			
+		</trim>
+	</select>
+	
+	<select id="selectPersonBoById" parameterType="long" resultMap="personBoMap">
+		SELECT *
+		FROM
+		person
+		WHERE id = #{id}
+	</select>
+	
+    <select id="selectPersonBoByIdNumber" parameterType="String" resultMap="personBoMap">
+		SELECT *
+		FROM
+		person
+		WHERE id_number = #{idNumber}
+	</select>
+	
+	<delete id="deleteByIds" parameterType="long">
+		delete from person where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+	<delete id="deleteById" parameterType="long">
+		delete from person where id = #{id}
+	</delete>
+	
+	<delete id="deleteTaskAndPerson" parameterType="long">
+	<!-- 0 personId   1  taskId -->
+		delete from task_and_person where person_id = #{0} and task_id = #{1}
+	</delete>
+	
+	<select id="selectPersonsByTaskId" parameterType="long" resultMap="auditPersonBoMap">
+	SELECT p.*, tap.task_id, pa.passport_status, pa.flow_status, pa.flow_msg
+		FROM
+		task_and_person tap
+		JOIN person p
+		ON p.id = tap.person_id 
+		LEFT JOIN 
+		  passport pa
+		ON p.id_number = pa.id_number 
+		WHERE tap.task_id = #{taskId}
+	</select>
+	
+    <select id="selectPersonByVisaStatus" parameterType="Integer" resultMap="auditPersonBoMap">
+	SELECT p.*, vp.task_id, vp.flow_status
+		FROM
+		  person p
+		LEFT JOIN 
+		  visa_principal vp
+		ON p.id = vp.person_id 
+		WHERE vp.flow_status = #{status}
+	</select>
+	
+	<select id="selectHasApplyPersonIds" parameterType="long" resultType="long">
+		SELECT tap.person_id
+		FROM
+		task_and_person tap, apply_passport_info api
+		WHERE tap.person_id = api.person_id and tap.task_id = #{taskId}
+	</select>
+	
+	
+	<select id="selectPersonsByTaskIdForToDoList" parameterType="long" resultMap="auditPersonBoMap">
+		SELECT p.*, tap.task_id, pa.passport_status, pa.flow_status, pa.flow_msg
+		FROM
+		task_and_person tap
+		JOIN person p
+		ON p.id = tap.person_id 
+		LEFT JOIN 
+		  passport pa
+		ON p.id_number = pa.id_number 
+		WHERE tap.task_id = #{taskId} AND pa.flow_status in (0,2)
+	</select>
+	
+	<select id="getTaskAndPerson" resultType="int">
+	   select count(*) from task_and_person where task_id= #{0} and person_id = #{1}
+	</select>
+	
+	<select id="getTaskHeaderPerson" resultMap="personBoMap">
+	   select * from person person,task_and_person tap where person.id = tap.person_id and person.identity = 3 and tap.task_id=  #{0} 
+	</select>
+
+</mapper>

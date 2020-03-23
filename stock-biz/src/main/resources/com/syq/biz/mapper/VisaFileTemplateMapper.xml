@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.VisaFileTemplateMapper">
+
+	<resultMap type="com.syq.biz.domain.VisaFileTemplate" id="visaFileTemplateMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="url" column="url" />
+		<result property="type" column="type" />
+		<result property="description" column="description" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+	</resultMap>
+
+	<resultMap type="com.syq.biz.bo.VisaFileTemplateBo" id="boMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="url" column="url" />
+		<result property="type" column="type" />
+		<result property="description" column="description" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="cafileId" column="cafileId" />
+		<result property="flowStatus" column="flow_status" />
+		<result property="flowMsg" column="flow_msg" />
+	</resultMap>
+
+	<resultMap type="com.syq.biz.bo.VisaFileFlowBo" id="flowBoMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="url" column="url" />
+		<result property="createTime" column="create_time" />
+		<result property="operatorId" column="operator_id" />
+		<result property="operatorTime" column="operator_time" />
+		<result property="cafileId" column="cafileId" />
+		<result property="flowStatus" column="flow_status" />
+		<result property="flowMsg" column="flow_msg" />
+		<result property="flowStatusValue" column="flow_status_value" />
+		<result property="principalId" column="principal_id" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.syq.biz.domain.VisaFileTemplate"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO visa_file_template (
+		NAME,
+		TYPE,
+		URL,
+		CREATE_TIME,
+		OPERATOR_ID,
+		OPERATOR_TIME
+		<if test="description != null and description != ''">
+			,description
+		</if>
+		)
+		VALUES
+		(
+		#{name},
+		#{type},
+		#{url},
+		#{createTime},
+		#{operatorId},
+		#{operatorTime}
+		<if test="description != null and description != ''">
+			,#{description}
+		</if>
+		)
+	</insert>
+
+	<delete id="delete" parameterType="long">
+		delete from visa_file_template where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<select id="selectByCondition" parameterType="com.syq.biz.domain.VisaFileTemplate"
+		resultMap="visaFileTemplateMap">
+		SELECT *
+		FROM
+		visa_file_template
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				name like CONCAT('%',#{name},'%')
+			</if>
+
+			<if test="url != null and url != ''">
+				url like CONCAT('%',#{url},'%')
+			</if>
+
+			<if test="type != null ">
+				type = #{type}
+			</if>
+
+		</trim>
+
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+	</select>
+
+	<select id="countUsed" parameterType="long" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		country_and_file
+		WHERE file_id = #{id}
+	</select>
+
+
+
+	<select id="selectByCountry" parameterType="com.syq.biz.bo.VisaFileFlowBo"
+		resultMap="visaFileTemplateMap">
+		SELECT *
+		FROM
+		visa_file_template vft right join country_and_file caf on
+		vft.id = caf.file_id left join visa_file_flow vff on vff.cafile_id =
+		caf.id
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				vft.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="countryId != null and countryId != 0">
+				caf.country_id = #{countryId}
+			</if>
+
+			<if test="principalId != null and principalId != 0">
+				vff.principal_id = #{principalId}
+			</if>
+
+		</trim>
+	</select>
+
+	<select id="selectForFlow" parameterType="com.syq.biz.bo.VisaFileFlowBo"
+		resultMap="boMap">
+		SELECT vft.name as name,vft.url as url,vft.type as
+		type,vff.flow_status as flow_status,vff.flow_msg as
+		flow_msg,caf.id as
+		cafileId
+		FROM
+		visa_file_template vft right
+		join country_and_file caf on
+		vft.id = caf.file_id left join
+		visa_file_flow vff on caf.id =
+		vff.cafile_id
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				vft.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="countryId != null and countryId != 0">
+				caf.country_id = #{countryId}
+			</if>
+			<if test="principalId != null and principalId != 0">
+				vff.principal_id = #{principalId}
+			</if>
+
+		</trim>
+
+	</select>
+
+
+
+	<select id="selectForSubmit" parameterType="com.syq.biz.bo.VisaFileFlowBo"
+		resultMap="boMap">
+		SELECT vft.name as name,vft.url as url,vft.type as
+		type,vff.flow_status,vff.flow_msg,caf.id as
+		cafileId
+		FROM
+		visa_file_template vft right
+		join country_and_file caf on
+		vft.id = caf.file_id left join visa_file_flow vff on (vff.cafile_id = caf.id and vff.principal_id = #{principalId})
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				vft.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="countryId != null and countryId != 0">
+				caf.country_id = #{countryId}
+			</if>
+			<if test="principalId != null and principalId != 0">
+				and caf.id not in (select vff.cafile_id FROM
+				visa_file_flow vff where
+				vff.principal_id = #{principalId} and (vff.flow_status = 3 and vff.flow_status = 1))
+			</if>
+
+		</trim>
+
+	</select>
+
+
+	<select id="selectForAudit" parameterType="com.syq.biz.domain.VisaFileTemplate"
+		resultMap="boMap">
+		SELECT vft.name as name,vft.url as url,vft.type as
+		type,vff.flow_status as flow_status,vff.flow_msg as
+		flow_msg,caf.id as
+		cafileId
+		FROM
+		visa_file_template vft right
+		join country_and_file caf on
+		vft.id = caf.file_id left join
+		visa_file_flow vff on caf.id =
+		vff.cafile_id
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				vft.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="countryId != null and countryId != 0">
+				caf.country_id = #{countryId}
+			</if>
+
+		</trim>
+
+	</select>
+
+	<update id="updateFileStatus" parameterType="com.syq.biz.domain.VisaFileTemplate">
+		UPDATE visa_file_flow
+		set
+		flow_status=#{flowStatus}
+		<if test="flowMsg != null and flowMsg != ''">
+			flow_msg = #{flowMs}
+		</if>
+		WHERE id=#{cafileId}
+
+	</update>
+
+
+
+	<select id="selectVisaFileFlow" resultType="com.syq.biz.bo.VisaFileFlowBo">
+		SELECT *
+		FROM
+		visa_file_flow
+		WHERE
+		cafile_id = #{0}
+		and principal_id = #{1}
+
+	</select>
+
+
+	<insert id="insertVisaFileFlow" parameterType="com.syq.biz.bo.VisaFileFlowBo">
+		INSERT INTO
+		visa_file_flow (
+		cafile_id,
+		principal_id,
+		<if test="url != null and url != ''">
+			value,
+		</if>
+		flow_status,
+		CREATE_TIME,
+		OPERATOR_ID,
+		OPERATOR_TIME
+		)
+		VALUES
+		(
+		#{cafileId},
+		#{principalId},
+		<if test="url != null and url != ''">
+			#{url},
+		</if>
+		#{flowStatus},
+		#{createTime},
+		#{operatorId},
+		#{operatorTime}
+		)
+	</insert>
+
+	<update id="updateVisaFileFlowStatus" parameterType="com.syq.biz.bo.VisaFileFlowBo">
+		UPDATE visa_file_flow
+		set
+		<if test="flowMsg != null and flowMsg != ''">
+			flow_msg = #{flowMsg},
+		</if>
+		flow_status=#{flowStatus}
+		
+		WHERE
+		1=1
+		<if test="cafileId != null and cafileId != 0">
+			and cafile_id = #{cafileId}
+		</if>
+		<if test="id != null and id != 0">
+			and id = #{id}
+		</if>
+
+	</update>
+
+
+	<select id="selectVisaFileFlowByCondtion" parameterType="com.syq.biz.bo.VisaFileFlowBo"
+		resultMap="flowBoMap">
+		SELECT vff.id as id,vff.value as flow_status_value, vft.name as name,vft.url as url,vft.type as
+		type,vff.flow_status as flow_status,vff.flow_msg as
+		flow_msg,caf.id as
+		cafileId
+		FROM
+		visa_file_flow vff left join country_and_file caf on
+		caf.id = vff.cafile_id
+		left join visa_file_template vft on vft.id =
+		caf.file_id
+
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				vft.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="countryId != null and countryId != 0">
+				caf.country_id = #{countryId}
+			</if>
+
+			<if test="principalId != null and principalId != 0">
+				vff.principal_id = #{principalId}
+			</if>
+
+			<if test="flowStatusArray != null and flowStatusArray.size() != 0">
+				AND vff.flow_status in
+				<foreach item="s" collection="flowStatusArray" open="("
+					separator="," close=")">
+					#{s}
+				</foreach>
+			</if>
+
+		</trim>
+
+	</select>
+
+
+	<insert id="saveCountryAndFile">
+		INSERT INTO country_and_file (
+		country_id,
+		file_id
+		)
+		VALUES
+		(
+		#{0},
+		#{1}
+		)
+	</insert>
+
+	<select id="selectCountryAndFile" resultType="Long">
+		SELECT id
+		FROM
+		country_and_file
+		WHERE
+		country_id = #{0}
+		and file_id = #{1}
+	</select>
+
+
+	<select id="selectCountCAFByFileId" resultType="int">
+		SELECT count(*)
+		FROM
+		country_and_file
+		WHERE
+		file_id = #{0}
+	</select>
+
+	<select id="selectCountCAFByCountryId" resultType="int">
+		SELECT count(*)
+		FROM
+		country_and_file
+		WHERE
+		country_id = #{0}
+	</select>
+	
+	<delete id="deleteCountryAndFile">
+		delete from country_and_file
+		where country_id = #{0}
+		and file_id = #{1}
+	</delete>
+
+	<select id="selectVisaFileTemplateBoById" resultMap="boMap">
+		SELECT *
+		FROM
+		visa_file_template
+		WHERE
+		id = #{0}
+	</select>
+
+	<select id="selectVisaFileFlowById" resultMap="flowBoMap">
+		SELECT *
+		FROM
+		visa_file_flow
+		WHERE
+		id = #{0}
+	</select>
+
+</mapper>

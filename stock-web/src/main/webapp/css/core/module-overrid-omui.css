@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+/**
+ * @name: overrid om ui 中的样式
+ * @overview: 全局性的覆盖 om - ui 的样式
+ * @author: huiji
+ */
+@media screen , projection {
+
+
+	/* grid-op-menu 中的 需要覆盖的样式*/
+	.om-grid div.bDiv td div.aps-op-menu {
+		border: 1px solid #99A8BC;
+		padding: 0;
+	}
+	.om-grid div.bDiv td div.aps-op-menu>div {
+		padding-left: 30px;
+		border-bottom: 1px solid #BCBBBB;
+		border-top: 1px solid #EEE;
+	}
+	
+	/* 覆盖 原先的 99999，否则dialog 里面可以移动*/
+	.om-grid .om-resizable-handle {
+		z-index: 999;
+	}
+	
+	
+	/*aps form 覆盖 dialog 里面 input 被omui 污染的样式 */
+	.aps-form table input {
+		padding: 0px;
+	}
+	
+	/*左边导航栏 覆盖 om 背景样式*/
+	#aps-leftnav .nav-panel {
+		background-color: transparent;
+	}
+	#aps-leftnav .om-panel-header {
+		margin-right:1px;
+	}
+	
+	
+	/*覆盖 om button 样式*/
+	.apusic-btn-deepblue .om-btn-bg {background: url(../../images/om/button-nomal-bgstyle1.png);}
+	.apusic-btn-deepblue .om-btn-left {background-position: 100% 0px;background-repeat: no-repeat!important;}
+	.apusic-btn-deepblue .om-btn-center {background-position: 100% -28px;background-repeat: repeat-x!important;}
+	.apusic-btn-deepblue .om-btn-right {background-position: 100% -56px;background-repeat: no-repeat!important;}
+	
+	.apusic-btn-deepblue:hover .om-btn-bg {background: url(../images/om/button-hover-bgstyle1.png);}
+	.apusic-btn-deepblue:hover .om-btn-left {background-position: 100% 0px;background-repeat: no-repeat!important;}
+	.apusic-btn-deepblue:hover .om-btn-center {background-position: 100% -28px;background-repeat: repeat-x!important;}
+	.apusic-btn-deepblue:hover .om-btn-right {background-position: 100% -56px;background-repeat: no-repeat!important;}
+	.apusic-btn-deepblue a, .apusic-btn-deepblue:hover a:link, .apusic-btn-deepblue:hover a:visited{color: #FFFFFF;}
+}

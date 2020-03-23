@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+.aps-security-tree-container{
+	float: left;
+}
+
+.search-panel{
+	background: #DBE2EC;
+	/*margin-bottom: 10px;*/
+	padding: 5px;
+}
+.category-title{
+	background: #CADDF5;
+	border: 1px solid #95A9BC;
+	line-height: 20px;
+	vertical-align: middle;
+	font-weight: bold;
+	padding-left: 3px;
+	font-size: 12px;
+	height: 20px;
+}
+.search-header{
+	padding: 5px;
+	background: url("images/header_bg.jpg");
+}
+.search-header .search-box{
+	height: 16px;
+	background: url("images/Search_16_2.png") no-repeat scroll 0 0 white;
+	padding-left: 15px;
+	border: 1px solid #99A8BB;
+	line-height: 16px;
+}
+
+input.input-align {
+	_margin-left: -3px;
+	margin-top: -3px;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+.cursor-click{
+	cursor: pointer;
+}
+.round-conner-button-text{
+	margin-bottom: 8px;
+	display: inline-block;
+	font-weight: bold;
+	color: white;
+	padding: 3px 0 0 20px;
+}
+
+.ztree li span.button.aps-tree-node-disabled_ico_open{
+	cursor: default;
+}
+.ztree li span.button.aps-tree-node-disabled_ico_close{
+	cursor: default;
+}
+
+.aps-form .aps-collapse-separator{
+	height: 35px;
+	width: 10px;
+	padding-top: 5px;
+	cursor: pointer;
+	margin-right: 4px;
+	background: url(images/spand.png) no-repeat 1px 15px;
+	background-color: #CCC;
+}
+.aps-form .aps-collapse-separator:hover{
+	background-color: #000;
+}
+.aps-form .aps-expand-separator{
+	height: 35px;
+	width: 10px;
+	padding-top: 5px;
+	cursor: pointer;
+	margin-right: 4px;
+	background: url(images/spand.png) no-repeat -11px 13px;
+	background-color: #CCC;
+}
+.aps-form .aps-expand-separator:hover{
+	background-color: #000;
+}
+
+/*覆盖om样式*/
+.om-tabs .om-tabs-panels .om-panel-body {
+	padding-left: 0;
+	padding-right: 0;
+}

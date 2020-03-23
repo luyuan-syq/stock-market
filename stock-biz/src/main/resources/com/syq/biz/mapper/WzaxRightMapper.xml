@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.WzaxRightMapper">
+
+	<resultMap type="com.syq.biz.domain.WzaxRight" id="rightMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name" />
+		<result property="uuid" column="uuid" />
+		<result property="url" column="url" />
+		<association property="module" column="module_id"
+			javaType="com.syq.biz.domain.WzaxModule" select="selectByModuleId">
+		</association>
+	</resultMap>
+	
+	<select id="selectByModuleId" parameterType="long" resultType="com.syq.biz.domain.WzaxModule">
+        select * from wzax_module where id = #{module_id}  
+    </select> 
+    
+    <select id="selectByRoleId" parameterType="long" resultMap="rightMap">
+        select * from wzax_right wr,role_and_right rar where  wr.id = rar.right_id and rar.role_id = #{roleId}
+    </select>
+	
+	
+
+
+</mapper>

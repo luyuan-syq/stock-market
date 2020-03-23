@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/content/base">
+	<excludes>
+	   <pattern>/css/*</pattern>
+	   <pattern>/js/*</pattern>
+	   <pattern>/images/*</pattern>
+	   <pattern>/**/upload</pattern>
+	   <pattern>/**/upload*</pattern>
+	</excludes>
+	
+	
+	<decorator name="faff" page="faff.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	
+	<decorator name="none" page="none.jsp">
+	</decorator>
+	
+	<decorator name="logint" page="logint.jsp">
+	</decorator>
+	
+</decorators>

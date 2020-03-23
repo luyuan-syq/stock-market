@@ -1,0 +1,157 @@
+@CHARSET "UTF-8";
+
+@media screen , projection {
+	
+	
+	#wzax-topnav a {
+		color: #1E1E1E;
+		font-weight: normal;
+		background-color: transparent;
+		text-decoration: none;
+	}
+	
+	#wzax-topnav a:focus,#wzax-topnav a:hover,#wzax-topnav a:active {
+		text-decoration: none;
+		background-color: transparent;
+	}
+	
+	
+	#wzax-topnav .left {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 5px;
+		height: 38px;
+	}
+	#wzax-topnav  .right {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 5px;
+		height: 38px;
+	}
+	
+	#wzax-topnav .middle {
+		padding: 0 5px;
+		height: 38px;
+	}
+	
+	
+	/* hover 样式*/
+	#wzax-topnav .item-hover:HOVER  .left {
+		background: transparent url("../../images/headerhover_left.png") no-repeat center;
+	}
+	#wzax-topnav .item-hover:HOVER  .right {
+		background: transparent url("../../images/headerhover_right.png") no-repeat center;
+	}
+	#wzax-topnav .item-hover:HOVER  .middle {
+		background: transparent url("../../images/headerhover_middle.png") repeat-x center;
+	}
+	
+	#wzax-topnav .nav-hover:HOVER {
+		background-color:#a7b6c9;
+		cursor: pointer;
+	}
+
+
+	#wzax-logo-wrapper .item-guide {
+		position: relative;
+		float: left;
+		height: 40px;
+		line-height: 40px;
+		vertical-align: middle;
+		margin-right: 5px;
+		padding: 0px;
+	}
+	
+	#wzax-logo-wrapper ul{
+		list-style-type: none;
+	}
+
+	/* Guide Bar的样式  */
+	#wzax-guidebar {
+		float: right;
+	}
+	#wzax-guidebar ul{
+		list-style-type: none;
+	}
+	
+	#wzax-guidebar .item-guide {
+		position: relative;
+		float: left;
+		height: 40px;
+		line-height: 40px;
+		vertical-align: middle;
+		margin-right: 5px;
+		padding: 0px;
+	}
+	
+	#wzax-guidebar .item-guide a {
+		display: block;
+		padding: 0 0 0 20px;
+	}
+	 
+	#wzax-guidebar .item-guide a.wzax-logout-href {
+		margin-right:10px;
+		background: transparent url("../../images/power_16.png") no-repeat left center;
+	}
+	
+	#wzax-guidebar .item-guide .separator {
+		width: 10px;
+		height: 38px;
+		background: transparent url("../../images/topnav-separator.png") no-repeat center;
+	}
+	
+
+	/* 站点选择样式 */
+	#wzax-topnav .site-nav{
+		text-align:center;
+		/*width:100px;*/
+	}
+	
+	
+	#wzax-topnav .site-nav .principal{
+		display: none; /*覆盖全局 a block*/
+		/*width:40px;*/
+		font-weight: bold;
+		background: transparent url("../../images/person.png") no-repeat center left;
+	}
+	
+	#wzax-topnav .site-nav .drop-down{
+		padding:0 5px;
+		background: transparent url("../../images/header_arrow.png") no-repeat center right;
+	}
+	
+	
+	#wzax-topnav  .site-nav-list {
+		display:none;
+		width:130px;
+		position:absolute;
+		background-color: #e8ebf0;
+		border: 1px solid #789dd4;
+	}
+	
+	#wzax-topnav  .site-nav-item {
+		position: relative;
+		height: 27px;
+		margin:0px 4px;
+		border-bottom: 1px solid #BCBBBB;
+		border-top: 1px solid #EEE;
+		text-align: left;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	
+	 .site-nav-list .site-nav-item a{
+		display: block;
+		padding: 0 0 0 20px;
+		background: transparent url("../../images/web.png") no-repeat left center;
+	}
+	
+	#wzax-topnav .site-nav-item .left ,
+	#wzax-topnav .site-nav-item  .right ,
+	#wzax-topnav  .site-nav-item .middle {
+		height: 27px;
+	}
+	
+}

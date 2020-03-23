@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+.aps-ssomanager-container #account-list{
+	width:100%;
+	padding-left:0;
+	padding-right:0;
+}
+
+.grayColor{
+	color: gray;
+}
+/*.buttonbar{
+	margin-bottom:10px;
+}
+.appAccountbuttonbar{
+	margin-bottom:10px;
+}*/
+.aps-op-menu .edit{
+	background-image: url(../../css/images/16/edit.png);
+}
+
+.aps-op-menu .create{
+	background-image: url(../../css/images/16/add.png);
+}
+
+.aps-console-appaccount-view-wrap .search {
+	background-color: #DBE2EC;
+	padding: 6px 0 6px 5px;
+	/* margin-bottom: 9px;*/
+}
+.aps-op-menu .delete{
+	background-image: url(../../css/images/16/delete.png);
+}
+.aps-form table select{
+		height: 22px;
+		vertical-align: middle;
+		border: 1px solid #7B8FAB;
+		line-height: 20px;
+		width: 154px;
+	}
+.aps-form table .appIcon{
+		height: 22px;
+		vertical-align: middle;
+		border: 1px solid #7B8FAB;
+		line-height: 20px;
+		width: 154px;
+}
+
+.iconRemind{
+	color: #828282;
+	background: url('../../images/16//attention.png') no-repeat scroll top left;
+	padding-left: 20px;
+	white-space: nowrap;
+	background-repeat: no-repeat;
+}
+

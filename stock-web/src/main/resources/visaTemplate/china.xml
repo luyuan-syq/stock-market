@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    字段类型type分为：文本输入textInput和文本选择textSelect
+    其中文本输入对应的显示类型displayType包括：text和textarea
+    文本选择对应的显示类型displayType包括：radio,checkbox和select
+ -->
+<categorys>
+
+
+   <category id="user" name="用户信息" order="1">
+		<fields>
+			<field id="sex" name="性别" type="textInput" displayType="text"
+				isRequired="false" isVisible="true" isEditable="true"
+				isColumnVisible="false">
+				<validate description="任意字符"></validate>
+				<values />
+			</field>
+			<field id="title" name="职务" type="textInput" displayType="text"
+				isRequired="false" isVisible="true" isEditable="true"
+				isColumnVisible="false">
+				<validate description="任意字符"></validate>
+				<values />
+			</field>
+			<field id="jobnum" name="工号" type="textInput" displayType="text"
+				isRequired="false" isVisible="true" isEditable="true"
+				isColumnVisible="false">
+				<validate description="任意字符"></validate>
+				<values />
+			</field>
+			<field id="mobile" name="手机号码" type="textInput" displayType="text"
+				isRequired="false" isVisible="true" isEditable="true"
+				isColumnVisible="false">
+				<validate description="任意字符"></validate>
+				<values />
+			</field>
+		</fields>
+	</category>
+    
+    
+    <category id="hobbyInfo" name="爱好信息" order="2">
+		<fields>
+			<field id="userSport" name="体育爱好" type="textSelect"
+				displayType="checkbox" isRequired="false" isVisible="true"
+				isEditable="true" isColumnVisible="false">
+				<validate description=""></validate>
+				<values>
+					<value isChecked="false">游泳</value>
+					<value isChecked="false">爬山</value>
+					<value isChecked="false">跑步</value>
+				</values>
+			</field>
+			<field id="userDiet" name="饮食爱好" type="textSelect" displayType="radio"
+				isRequired="false" isVisible="true" isEditable="true"
+				isColumnVisible="false">
+				<validate description=""></validate>
+				<values>
+					<value isChecked="false">粤菜</value>
+					<value isChecked="false">川菜</value>
+					<value isChecked="false">湘菜</value>
+				</values>
+			</field>
+		</fields>
+	</category>
+	
+</categorys>
+

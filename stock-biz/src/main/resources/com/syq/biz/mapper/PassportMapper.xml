@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.syq.biz.mapper.PassportMapper">
+
+	<resultMap id="BaseResultMap" type="com.syq.biz.domain.Passport">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="task_id" property="taskId" jdbcType="BIGINT" />
+		<result column="task_code" property="taskCode" jdbcType="VARCHAR" />
+		<result column="passport_no" property="passportNo" jdbcType="VARCHAR" />
+		<result column="passport_type" property="passportType"
+			jdbcType="CHAR" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="SMALLINT" />
+		<result column="data_birth" property="dataBirth" jdbcType="TIMESTAMP" />
+		<result column="place_birth" property="placeBirth" jdbcType="VARCHAR" />
+		<result column="place_issue" property="placeIssue" jdbcType="VARCHAR" />
+		<result column="date_issue" property="dateIssue" jdbcType="TIMESTAMP" />
+		<result column="date_expire" property="dateExpire" jdbcType="TIMESTAMP" />
+		<result column="anthority" property="anthority" jdbcType="VARCHAR" />
+		<result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+		<result column="passport_status" property="passportStatus"
+			jdbcType="SMALLINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="operator_time" property="operatorTime"
+			jdbcType="TIMESTAMP" />
+		<result column="operator_id" property="operatorId" jdbcType="TIMESTAMP" />
+		<result column="flow_status" property="flowStatus" jdbcType="SMALLINT" />
+		<result column="flow_msg" property="flowMsg" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="PassportBoResultMap" type="com.syq.biz.bo.PassportBo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="task_id" property="taskId" jdbcType="BIGINT" />
+		<result column="task_code" property="taskCode" jdbcType="VARCHAR" />
+		<result column="passport_no" property="passportNo" jdbcType="VARCHAR" />
+		<result column="passport_type" property="passportType"
+			jdbcType="CHAR" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="SMALLINT" />
+		<result column="data_birth" property="dataBirth" jdbcType="TIMESTAMP" />
+		<result column="place_birth" property="placeBirth" jdbcType="VARCHAR" />
+		<result column="place_issue" property="placeIssue" jdbcType="VARCHAR" />
+		<result column="date_issue" property="dateIssue" jdbcType="TIMESTAMP" />
+		<result column="date_expire" property="dateExpire" jdbcType="TIMESTAMP" />
+		<result column="anthority" property="anthority" jdbcType="VARCHAR" />
+		<result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+		<result column="passport_status" property="passportStatus"
+			jdbcType="SMALLINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="operator_time" property="operatorTime"
+			jdbcType="TIMESTAMP" />
+		<result column="operator_id" property="operatorId" jdbcType="TIMESTAMP" />
+		<result column="flow_status" property="flowStatus" jdbcType="SMALLINT" />
+		<result column="flow_msg" property="flowMsg" jdbcType="VARCHAR" />
+		<result column="userName" property="userName" />
+		<result column="taskName" property="taskName" />
+		<result column="instructionNo" property="instructionNo" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, task_id, task_code, passport_no, passport_type, country_code, name,
+	    sex, data_birth, place_birth, place_issue, date_issue, date_expire,
+		anthority, id_number, passport_status, create_time, operator_time,
+		operator_id,
+		flow_status, flow_msg
+	</sql>
+	<sql id="Base_Column_Table">
+		from passport
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<if test="taskCode != null">
+				AND task_code = #{taskCode}
+			</if>
+			<if test="name != null and name != ''">
+				AND name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="idNumber != null and idNumber != ''">
+				AND id_number like CONCAT('%',#{idNumber},'%')
+			</if>
+			<if test="passportNo != null and passportNo != ''">
+				AND passport_no = #{passportNo}
+			</if>
+			<if test="passportStatus != null">
+				AND passport_status = #{passportStatus}
+			</if>
+			<if test="dateIssue != null and dateIssue!=''">
+				AND date_issue &gt;= #{dateIssue}
+			</if>
+			<if test="dateExpire != null and dateExpire!=''">
+				AND date_expire &gt;= #{dateExpire}
+			</if>
+			<if test="expireBeginTime != null ">
+				AND date_expire <![CDATA[>=]]>
+				#{expireBeginTime}
+			</if>
+			<if test="expireEndTime != null ">
+				AND date_expire <![CDATA[<=]]>
+				#{expireEndTime}
+			</if>
+			<if test="notReturnLimitTime != null ">
+				AND operator_time <![CDATA[<=]]>
+				#{notReturnLimitTime}
+			</if>
+
+			<if test="status != null and status.length != 0">
+				AND flow_status in
+				<foreach item="s" collection="status" open="(" separator=","
+					close=")">
+					#{s}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List_TODO">
+		pp.id, pp.task_id, pp.task_code, pp.passport_no, pp.passport_type,
+		pp.country_code,pp.name, pp.sex, pp.data_birth, pp.place_birth, pp.place_issue, pp.date_issue,
+		pp.date_expire,
+		pp.anthority, pp.id_number, pp.passport_status, pp.create_time, pp.operator_time,
+		pp.operator_id,
+		pp.flow_status, pp.flow_msg,ta.task_name as taskName,ta.instruction_no as
+		instructionNo,pe.user_name as userName
+	</sql>
+
+	<sql id="Example_Where_Clause_TODO">
+	<where>
+		<if test="passportStatus != null">
+			AND passport_status = #{passportStatus}
+		</if>
+		<if test="dateIssue != null and dateIssue!=''">
+			AND date_issue &gt;= #{dateIssue}
+		</if>
+		<if test="dateExpire != null and dateExpire!=''">
+			AND date_expire &gt;= #{dateExpire}
+		</if>
+		<if test="expireBeginTime != null ">
+			AND date_expire <![CDATA[>=]]>
+			#{expireBeginTime}
+		</if>
+		<if test="expireEndTime != null ">
+			AND date_expire <![CDATA[<=]]>
+			#{expireEndTime}
+		</if>
+		<if test="notReturnLimitTime != null ">
+			AND operator_time <![CDATA[<=]]>
+			#{notReturnLimitTime}
+		</if>
+		<if test="status != null and status.length != 0">
+			AND flow_status in
+			<foreach item="s" collection="status" open="(" separator=","
+				close=")">
+				#{s}
+			</foreach>
+		</if>
+       </where>
+	</sql>
+
+	<select id="selectByPrimaryKey" parameterType="long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		<include refid="Base_Column_Table" />
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectCount" parameterType="com.syq.pagination.common.PassportPo"
+		resultType="int">
+		select count(*)
+		<include refid="Base_Column_Table" />
+		<include refid="Example_Where_Clause" />
+	</select>
+
+	<select id="selectCondition" parameterType="com.syq.pagination.common.PassportPo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		<include refid="Base_Column_Table" />
+		<include refid="Example_Where_Clause" />
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="selectCountForTodo" parameterType="com.syq.pagination.common.PassportPo"
+		resultType="int">
+		select count(*)
+		from passport pp LEFT JOIN task ta ON pp.task_id = ta.id LEFT JOIN person pe ON pp.id_number = pe.id_number
+		<include refid="Example_Where_Clause_TODO" />
+	</select>
+
+	<select id="selectConditionForTodo" parameterType="com.syq.pagination.common.PassportPo"
+		resultMap="PassportBoResultMap">
+		select
+		<include refid="Base_Column_List_TODO" />
+		from passport pp LEFT JOIN task ta ON pp.task_id = ta.id LEFT JOIN person pe ON pp.id_number = pe.id_number
+		<include refid="Example_Where_Clause_TODO" />
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField}
+			<if test="sortOrder != null and sortOrder != '' ">
+				${sortOrder}
+			</if>
+		</if>
+		<if test="start != null and maxResults != null">
+			limit ${start}, ${maxResults}
+		</if>
+	</select>
+
+	<select id="selectTaskPassportCount" parameterType="int"
+		resultType="java.util.Map">
+		select
+		task_code taskCode,
+		count(*) countNum
+		from
+		passport
+		<where>
+			<if test="_parameter != null">
+				AND flow_status = #{flowStatus,jdbcType=SMALLINT}
+			</if>
+		</where>
+		group by task_code;
+	</select>
+
+	<insert id="save" parameterType="com.syq.biz.domain.Passport"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into passport (task_id,
+		task_code,
+		passport_no, passport_type, country_code,
+		name,
+		sex, data_birth, place_birth,
+		place_issue, date_issue, date_expire,
+		anthority, id_number, passport_status,
+		flow_status,flow_msg, create_time, operator_time, operator_id
+		)
+		values (#{taskId,jdbcType=BIGINT}, #{taskCode,jdbcType=VARCHAR},
+		#{passportNo,jdbcType=VARCHAR}, #{passportType,jdbcType=CHAR},
+		#{countryCode,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=SMALLINT}, #{dataBirth,jdbcType=TIMESTAMP},
+		#{placeBirth,jdbcType=VARCHAR},
+		#{placeIssue,jdbcType=VARCHAR}, #{dateIssue,jdbcType=TIMESTAMP}, #{dateExpire,jdbcType=TIMESTAMP},
+		#{anthority,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR},
+		#{passportStatus,jdbcType=SMALLINT},
+		#{flowStatus,jdbcType=SMALLINT},#{flowMsg,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{operatorTime,jdbcType=TIMESTAMP},
+		#{operatorId,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+	<update id="update" parameterType="com.syq.biz.domain.Passport">
+		update passport
+		<set>
+			<if test="taskId != null">
+				task_id = #{taskId,jdbcType=BIGINT},
+			</if>
+			<if test="taskCode != null">
+				task_code = #{taskCode,jdbcType=VARCHAR},
+			</if>
+			<if test="passportNo != null">
+				passport_no = #{passportNo,jdbcType=VARCHAR},
+			</if>
+			<if test="passportType != null">
+				passport_type = #{passportType,jdbcType=CHAR},
+			</if>
+			<if test="countryCode != null">
+				country_code = #{countryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=SMALLINT},
+			</if>
+			<if test="dataBirth != null">
+				data_birth = #{dataBirth,jdbcType=TIMESTAMP},
+			</if>
+			<if test="placeBirth != null">
+				place_birth = #{placeBirth,jdbcType=VARCHAR},
+			</if>
+			<if test="placeIssue != null">
+				place_issue = #{placeIssue,jdbcType=VARCHAR},
+			</if>
+			<if test="dateIssue != null">
+				date_issue = #{dateIssue,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dateExpire != null">
+				date_expire = #{dateExpire,jdbcType=TIMESTAMP},
+			</if>
+			<if test="anthority != null">
+				anthority = #{anthority,jdbcType=VARCHAR},
+			</if>
+			<if test="idNumber != null">
+				id_number = #{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="passportStatus != null">
+				passport_status = #{passportStatus,jdbcType=SMALLINT},
+			</if>
+			<if test="flowStatus != null">
+				flow_status = #{flowStatus,jdbcType=SMALLINT},
+			</if>
+			<if test="flowMsg != null">
+				flow_msg = #{flowMsg,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operatorTime != null">
+				operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operatorId != null">
+				operator_id = #{operatorId,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from
+		passport
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<update id="releasePassportRelateTask" parameterType="java.lang.String">
+		update passport
+		set task_id = 0, task_code = ''
+		where id_number =
+		#{idNumber,jdbcType=VARCHAR}
+	</update>
+
+	<update id="batchUpdateStatus">
+		update passport
+		set flow_status =
+		#{1}
+		where task_id = #{0}
+	</update>
+
+
+</mapper>
